@@ -1,3 +1,5 @@
+===== Fork flier268's ConvertZZ =====
+
 # ConvertZZ
 
 ## 前言
@@ -15,18 +17,5 @@
 * 漂亮的UI
 * ID3 tag轉換
 
-## Download
-* [Release](https://github.com/flier268/ConvertZZ/releases "Release")
-
-## Wiki
-* [Github Wiki](https://github.com/flier268/ConvertZZ/wiki)
-
 ## Require
 * .Net 4.7.2以上
-
-## Issue
-* No,發現任何bug麻煩請回報給我，感謝
-
-## Donate:
-* [Paypal](http://paypal.me/flier268)(台灣以外地區)
-* [街口支付](https://i.imgur.com/IKowON0.png)(台灣地區)
