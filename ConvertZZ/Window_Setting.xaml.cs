@@ -253,8 +253,10 @@ namespace ConvertZZ {
         }
 
         private async void Button_DictionaryEdit_Click(object sender, RoutedEventArgs e) {
-            if (App.Settings.Engine == Enums.Enum_Engine.Local && App.DictionaryStatus != Enums.Enum_DictionaryStatus.Loaded)
+            if (App.Settings.Engine == Enums.Enum_Engine.Local && App.DictionaryStatus != Enums.Enum_DictionaryStatus.Loaded) {
                 await App.LoadDictionary(App.Settings.Engine);
+            }
+
             new Window_DictionaryEditor().ShowDialog();
         }
 
@@ -270,17 +272,21 @@ namespace ConvertZZ {
         }
 
         private void RadioButton_Fanhuaji_Checked(object sender, RoutedEventArgs e) {
-            if (!this.IsLoaded)
+            if (!IsLoaded) {
                 return;
-            if (Moudle.Window_MessageBoxEx.ShowDialog(Fanhuaji_API.Fanhuaji.Terms_of_Service, "使用繁化姬API須接受以下條約", "我不同意", "我同意") != Moudle.Window_MessageBoxEx.MessageBoxExResult.B)
+            }
+
+            if (Moudle.Window_MessageBoxEx.ShowDialog(Fanhuaji_API.Fanhuaji.Terms_of_Service, "使用繁化姬API須接受以下條約", "我不同意", "我同意") != Moudle.Window_MessageBoxEx.MessageBoxExResult.B) {
                 UseLocalDic = true;
+            }
         }
 
         private async void Window_Closing(object sender, CancelEventArgs e) {
-            if (App.Settings.VocabularyCorrection)
+            if (App.Settings.VocabularyCorrection) {
                 await App.LoadDictionary(App.Settings.Engine);
-            else
+            } else {
                 App.CleanDictionary();
+            }
         }
 
         public KeyValuePair<string, string> Quick_R3 {

@@ -98,17 +98,17 @@ namespace ConvertZZ.Moudle {
 
         private void Button_Click_1(object sender, RoutedEventArgs e) {
             Resoult = (MessageBoxExResult)(1 * (CheckBox_IsChecked ? 2 : 1));
-            this.Close();
+            Close();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e) {
             Resoult = (MessageBoxExResult)(3 * (CheckBox_IsChecked ? 2 : 1));
-            this.Close();
+            Close();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e) {
             Resoult = (MessageBoxExResult)(4 * (CheckBox_IsChecked ? 2 : 1));
-            this.Close();
+            Close();
             ColumnDefinition columnDefinition = new ColumnDefinition();
             columnDefinition.Width = new GridLength(1, GridUnitType.Star);
         }
@@ -148,8 +148,9 @@ namespace ConvertZZ.Moudle {
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void ThisWindows_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
-                this.DragMove();
+            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed) {
+                DragMove();
+            }
         }
 
 

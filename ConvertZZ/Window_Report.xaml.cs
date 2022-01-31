@@ -18,7 +18,7 @@ namespace ConvertZZ {
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e) {
             if (e.LeftButton == MouseButtonState.Pressed) {
-                this.DragMove();
+                DragMove();
             }
         }
 
@@ -55,7 +55,7 @@ namespace ConvertZZ {
                     Action methodDelegate = delegate () {
                         Close();
                     };
-                    this.Dispatcher.BeginInvoke(methodDelegate);
+                    Dispatcher.BeginInvoke(methodDelegate);
                 } catch {
                     MessageBox.Show("回報單傳送失敗，請確認網路連線狀態");
                 }

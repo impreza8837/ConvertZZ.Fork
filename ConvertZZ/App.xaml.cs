@@ -155,9 +155,9 @@ namespace ConvertZZ {
                         file.Add(x)
                     );
                 } else {
-                    if (File.Exists(path1))
+                    if (File.Exists(path1)) {
                         file.Add(path1);
-                    else {
+                    } else {
                         Console.WriteLine($"檔案\"{path1}\" 不存在");
                         Console.Read();
                         Shutdown(1);
@@ -170,8 +170,10 @@ namespace ConvertZZ {
                     Shutdown(1);
                     return;
                 }
-                if (string.IsNullOrWhiteSpace(path2))
+                if (string.IsNullOrWhiteSpace(path2)) {
                     path2 = path1;
+                }
+
                 if (path1.Count(x => x == '*') != path2.Count(x => x == '*') && path2.Contains("*")) {
                     Console.WriteLine("參數錯誤(輸出路徑的萬用字元術與輸入路徑不同)");
                     Console.Read();
@@ -190,7 +192,7 @@ namespace ConvertZZ {
                             s = streamReader.ReadToEnd();
                         }
                     }
-                    if (!EncodingSetted)
+                    if (!EncodingSetted) {
                         switch (EncodingAnalyzer.Analyze(s)) {
                             case -1:
                                 encoding[0] = Encoding.Default;
@@ -204,6 +206,8 @@ namespace ConvertZZ {
                                 encoding[0] = Encoding.GetEncoding("GBK");
                                 break;
                         }
+                    }
+
                     try {
                         s = await ConvertHelper.FileConvert(s, encoding, ToChinese, VocabularyCorrection);
                     } catch (Fanhuaji.FanhuajiException ex) {
@@ -223,8 +227,9 @@ namespace ConvertZZ {
                                 string @string = "";
                                 for (int i = 0; i < array.Length; i++) {
                                     @string += array[i];
-                                    if (i + 1 <= m1.Groups.Count - 1)
+                                    if (i + 1 <= m1.Groups.Count - 1) {
                                         @string += m1.Groups[i + 1].Value;
+                                    }
                                 }
 
                                 Directory.CreateDirectory(Path.GetDirectoryName(@string));
@@ -262,10 +267,12 @@ namespace ConvertZZ {
             switch (Engine) {
                 case Enum_Engine.Local:
                     DictionaryStatus = Enum_DictionaryStatus.Loading;
-                    if (Settings.VocabularyCorrection)
+                    if (Settings.VocabularyCorrection) {
                         await ChineseConverter.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Dictionary.csv"));
-                    else
+                    } else {
                         CleanDictionary();
+                    }
+
                     DictionaryStatus = Enum_DictionaryStatus.Loaded;
                     break;
                 case Enum_Engine.Fanhuaji:

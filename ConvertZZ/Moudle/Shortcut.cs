@@ -88,8 +88,10 @@ namespace ConvertZZ.Moudle {
             shortcut.TargetPath = targetPath;
             shortcut.WorkingDirectory = workingDirectory;
             shortcut.Arguments = arguments;
-            if (!string.IsNullOrEmpty(iconPath))
+            if (!string.IsNullOrEmpty(iconPath)) {
                 shortcut.IconLocation = iconPath;
+            }
+
             shortcut.Save();
         }
     }

@@ -87,7 +87,7 @@ namespace ConvertZZ.Pages {
         private void Page_Loaded(object sender, RoutedEventArgs e) {
             #region 註冊Hook並監聽剪貼簿            
             hWndSource = HwndSource.FromHwnd(hwnd);
-            hWndSource.AddHook(this.WinProc);   // start processing window messages 
+            hWndSource.AddHook(WinProc);   // start processing window messages 
             mNextClipBoardViewerHWnd = SetClipboardViewer(hWndSource.Handle);   // set this window as a viewer            
             #endregion
         }

@@ -9,9 +9,9 @@ namespace ConvertZZ {
     /// <summary>
     /// CheckboxTreeView.xaml 的互動邏輯
     /// </summary>
-    public partial class CheckboxTreeView : UserControl, INotifyPropertyChanged {
-        public CheckboxTreeView() {
-            this.DataContext = this;
+    public partial class CheckBoxTreeView : UserControl, INotifyPropertyChanged {
+        public CheckBoxTreeView() {
+            DataContext = this;
             InitializeComponent();
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -30,10 +30,12 @@ namespace ConvertZZ {
     }
     public class Node : INotifyPropertyChanged, ICloneable {
         public Node(Node Parent) {
-            if (Parent == null)
+            if (Parent == null) {
                 Generation = 1;
-            else
+            } else {
                 Generation = Parent.Generation + 1;
+            }
+
             this.Parent = Parent;
         }
         public void RegistPropertyChangedEvent() {
@@ -54,13 +56,15 @@ namespace ConvertZZ {
         public Node Parent {
             get => _Parent;
             private set {
-                if (value == null)
+                if (value == null) {
                     Generation = 1;
-                else {
+                } else {
                     Generation = value.Generation + 1;
-                    if (Nodes != null)
-                        foreach (Node child in Nodes)
+                    if (Nodes != null) {
+                        foreach (Node child in Nodes) {
                             child.Parent = this;
+                        }
+                    }
                 }
                 _Parent = value;
             }
@@ -73,22 +77,23 @@ namespace ConvertZZ {
             get => _Nodes;
             set {
                 _Nodes = value;
-                if (value != null)
-                    foreach (var child in _Nodes)
+                if (value != null) {
+                    foreach (var child in _Nodes) {
                         child.Parent = this;
+                    }
+                }
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
 
         public object Clone() {
-            var temp = this.MemberwiseClone() as Node;
+            var temp = MemberwiseClone() as Node;
             temp.Nodes = Nodes.Select(x => {
                 Node node = x.Clone() as Node;
                 node._Parent = temp;
                 return node;
-            }
-            ).ToList();
+            }).ToList();
             return temp;
         }
     }

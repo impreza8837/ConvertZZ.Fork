@@ -22,8 +22,10 @@ namespace ConvertZZ {
             if (File.Exists(FilePath)) {
                 using (StreamReader streamReader = new StreamReader(FilePath, Encoding.UTF8)) {
                     var temp = Settings.FromJson(streamReader.ReadToEnd());
-                    if (!temp.FileConvert.TypeFilter.Contains("<"))
+                    if (!temp.FileConvert.TypeFilter.Contains("<")) {
                         temp.FileConvert.TypeFilter = new Settings().FileConvert.TypeFilter;
+                    }
+
                     Settings = temp;
                 }
             }
@@ -188,8 +190,10 @@ namespace ConvertZZ {
         /// <returns></returns>
         public List<string> GetFilterList(bool AddFixedItem = true) {
             List<string> filter = new List<string>();
-            if (AddFixedItem)
+            if (AddFixedItem) {
                 filter.Add("任意檔案(*.*)|*.*");
+            }
+
             System.Text.RegularExpressions.Regex r_filter = new System.Text.RegularExpressions.Regex("<(.*?)>");
             TypeFilter.Split('/').ToList().ForEach(x => {
                 filter.Add(r_filter.Match(x).Groups[1].Value);
@@ -241,8 +245,10 @@ namespace ConvertZZ {
             window_KeyValueEditor.Button1_Action = new System.Action(() => {
                 StringBuilder sb = new StringBuilder();
                 window_KeyValueEditor.KeyValueItems.ToList().ForEach(x => {
-                    if (sb.Length > 0)
+                    if (sb.Length > 0) {
                         sb.Append("/");
+                    }
+
                     sb.AppendFormat("<{0}|{1}>", x.Key, x.Value);
                 });
                 TypeFilter = sb.ToString();

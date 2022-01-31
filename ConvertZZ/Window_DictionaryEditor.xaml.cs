@@ -43,10 +43,11 @@ namespace ConvertZZ {
         }
         void InputToOutput() {
             Output = ChineseConverter.Convert(Input, C_to_T);
-            if (C_to_T)
+            if (C_to_T) {
                 Output = ChineseConverter.ToTraditional(Output);
-            else
+            } else {
                 Output = ChineseConverter.ToSimplified(Output);
+            }
         }
 
         private void DataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e) {
@@ -62,10 +63,12 @@ namespace ConvertZZ {
                         default:
                             var obj = (DataGrid_Dictionary.Items[rowIndex] as DictionaryFile_Helper.Line);
                             var propertyInfo = obj.GetType().GetProperty(bindingPath);
-                            if (propertyInfo.PropertyType == typeof(int))
+                            if (propertyInfo.PropertyType == typeof(int)) {
                                 propertyInfo.SetValue(obj, int.Parse((e.EditingElement as TextBox).Text));
-                            else
+                            } else {
                                 propertyInfo.SetValue(obj, (e.EditingElement as TextBox).Text);
+                            }
+
                             break;
                     }
                 }
@@ -87,9 +90,9 @@ namespace ConvertZZ {
             }
         }
         private bool DictionaryFilter(object item) {
-            if (string.IsNullOrEmpty(DictionaryFilter_Text))
+            if (string.IsNullOrEmpty(DictionaryFilter_Text)) {
                 return true;
-            else {
+            } else {
                 var _ = (item as DictionaryFile_Helper.Line);
                 return _.SimplifiedChinese.IndexOf(DictionaryFilter_Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
                        _.TraditionalChinese.IndexOf(DictionaryFilter_Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
@@ -148,8 +151,10 @@ namespace ConvertZZ {
         #region Sort
         private async void ToggleButton_CheckedAsync(object sender, RoutedEventArgs e) {
             await Task.Delay(0);
-            if (DataGrid_Dictionary.ItemsSource == null)
+            if (DataGrid_Dictionary.ItemsSource == null) {
                 return;
+            }
+
             InputToOutput();
             PerformCustomSort(C_to_T);
         }
@@ -174,15 +179,17 @@ namespace ConvertZZ {
                     CompareResoult = b.SimplifiedChinese_Priority.CompareTo(a.SimplifiedChinese_Priority);
                     if (CompareResoult == 0) {
                         CompareResoult = b.SimplifiedChinese_Length.CompareTo(a.SimplifiedChinese_Length);
-                        if (CompareResoult == 0)
+                        if (CompareResoult == 0) {
                             CompareResoult = b.SimplifiedChinese.CompareTo(a.SimplifiedChinese);
+                        }
                     }
                 } else {
                     CompareResoult = b.TraditionalChinese_Priority.CompareTo(a.TraditionalChinese_Priority);
                     if (CompareResoult == 0) {
                         CompareResoult = b.TraditionalChinese_Length.CompareTo(a.TraditionalChinese_Length);
-                        if (CompareResoult == 0)
+                        if (CompareResoult == 0) {
                             CompareResoult = b.TraditionalChinese.CompareTo(a.TraditionalChinese);
+                        }
                     }
                 }
                 return CompareResoult;
@@ -192,8 +199,10 @@ namespace ConvertZZ {
 
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
-            if (ChineseConverter == null)
+            if (ChineseConverter == null) {
                 return;
+            }
+
             string value = (e.Source as TextBox).Text;
             Input = value.Substring(0, Math.Min(500, value.Length));
             InputToOutput();

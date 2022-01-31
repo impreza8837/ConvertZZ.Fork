@@ -24,10 +24,14 @@ namespace ConvertZZ {
         public MainWindow() {
             InitializeComponent();
             App.nIcon.MouseClick += NIcon_MouseClick;
-            if (0 < App.Settings.PositionX && App.Settings.PositionX < SystemParameters.WorkArea.Width)
+            if (0 < App.Settings.PositionX && App.Settings.PositionX < SystemParameters.WorkArea.Width) {
                 Left = App.Settings.PositionX;
-            if (0 < App.Settings.PositionY && App.Settings.PositionY < SystemParameters.WorkArea.Height)
+            }
+
+            if (0 < App.Settings.PositionY && App.Settings.PositionY < SystemParameters.WorkArea.Height) {
                 Top = App.Settings.PositionY;
+            }
+
             RegAllHotkey();
             ServerThread();
         }
@@ -54,41 +58,55 @@ namespace ConvertZZ {
         }
         private void NIcon_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e) {
             if (e.Button == System.Windows.Forms.MouseButtons.Right) {
-                ContextMenu NotifyIconMenu = (ContextMenu)this.FindResource("NotifyIconMenu");
+                ContextMenu NotifyIconMenu = (ContextMenu)FindResource("NotifyIconMenu");
                 NotifyIconMenu.IsOpen = true;
             }
         }
         void HotkeyAction1(Moudle.HotKey hotKey) {
-            if (App.Settings.HotKey.AutoCopy)
+            if (App.Settings.HotKey.AutoCopy) {
                 ClipBoardHelper.Copy(hotKey.Key, hotKey.KeyModifiers);
+            }
+
             MenuItem_Click(new MenuItem { Uid = App.Settings.HotKey.Feature1.Action, Visibility = Visibility.Hidden }, null);
-            if (App.Settings.HotKey.AutoPaste)
+            if (App.Settings.HotKey.AutoPaste) {
                 ClipBoardHelper.Paste();
+            }
         }
         void HotkeyAction2(Moudle.HotKey hotKey) {
-            if (App.Settings.HotKey.AutoCopy)
+            if (App.Settings.HotKey.AutoCopy) {
                 ClipBoardHelper.Copy(hotKey.Key, hotKey.KeyModifiers);
+            }
+
             MenuItem_Click(new MenuItem { Uid = App.Settings.HotKey.Feature2.Action, Visibility = Visibility.Hidden }, null);
-            if (App.Settings.HotKey.AutoPaste)
+            if (App.Settings.HotKey.AutoPaste) {
                 ClipBoardHelper.Paste();
+            }
         }
         void HotkeyAction3(Moudle.HotKey hotKey) {
-            if (App.Settings.HotKey.AutoCopy)
+            if (App.Settings.HotKey.AutoCopy) {
                 ClipBoardHelper.Copy(hotKey.Key, hotKey.KeyModifiers);
+            }
+
             MenuItem_Click(new MenuItem { Uid = App.Settings.HotKey.Feature3.Action, Visibility = Visibility.Hidden }, null);
-            if (App.Settings.HotKey.AutoPaste)
+            if (App.Settings.HotKey.AutoPaste) {
                 ClipBoardHelper.Paste();
+            }
         }
         void HotkeyAction4(Moudle.HotKey hotKey) {
-            if (App.Settings.HotKey.AutoCopy)
+            if (App.Settings.HotKey.AutoCopy) {
                 ClipBoardHelper.Copy(hotKey.Key, hotKey.KeyModifiers);
+            }
+
             MenuItem_Click(new MenuItem { Uid = App.Settings.HotKey.Feature4.Action, Visibility = Visibility.Hidden }, null);
-            if (App.Settings.HotKey.AutoPaste)
+            if (App.Settings.HotKey.AutoPaste) {
                 ClipBoardHelper.Paste();
+            }
         }
         private void RegHotkey(Feature feature, Action<Moudle.HotKey> action) {
-            if (!feature.Enable)
+            if (!feature.Enable) {
                 return;
+            }
+
             KeyModifier keyModifier = KeyModifier.None;
             feature.Modift.Split(',').ToList().ForEach(x => keyModifier = keyModifier | (KeyModifier)Enum.Parse(typeof(KeyModifier), x.Trim()));
             hotKeys.Add(new Moudle.HotKey((Key)Enum.Parse(typeof(Key), feature.Key), keyModifier, action));
@@ -110,7 +128,7 @@ namespace ConvertZZ {
             if (e.LeftButton == MouseButtonState.Pressed) {
                 pointNow = new Point(Left, Top);
                 leftDown = true;
-                this.DragMove();
+                DragMove();
             }
         }
         private void About_Click(object sender, RoutedEventArgs e) {
@@ -130,38 +148,41 @@ namespace ConvertZZ {
             RegAllHotkey();
         }
         private void Exit_Click(object sender, RoutedEventArgs e) {
-            this.Close();
+            Close();
             App.nIcon.Visible = false;
             App.nIcon.Dispose();
             Environment.Exit(0);
         }
         private void Window_MouseUp(object sender, MouseButtonEventArgs e) {
-            ContextMenu NotifyIconMenu = (ContextMenu)this.FindResource("NotifyIconMenu");
+            ContextMenu NotifyIconMenu = (ContextMenu)FindResource("NotifyIconMenu");
             e.Handled = true;
             switch (e.ChangedButton) {
                 case MouseButton.Left: {
                     if (Left == pointNow.X && Top == pointNow.Y && leftDown) {
-                        if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) {
                             MenuItem_Click(GetByUid(NotifyIconMenu, App.Settings.QuickStart.LeftClick_Ctrl), null);
-                        else if (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt))
+                        } else if (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt)) {
                             MenuItem_Click(GetByUid(NotifyIconMenu, App.Settings.QuickStart.LeftClick_Alt), null);
-                        else if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                        } else if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) {
                             MenuItem_Click(GetByUid(NotifyIconMenu, App.Settings.QuickStart.LeftClick_Shift), null);
-                        else
+                        } else {
                             e.Handled = false;
-                    } else
+                        }
+                    } else {
                         e.Handled = false;
+                    }
                 }
                 break;
                 case MouseButton.Right: {
-                    if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+                    if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) {
                         MenuItem_Click(GetByUid(NotifyIconMenu, App.Settings.QuickStart.RightClick_Ctrl), null);
-                    else if (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt))
+                    } else if (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt)) {
                         MenuItem_Click(GetByUid(NotifyIconMenu, App.Settings.QuickStart.RightClick_Alt), null);
-                    else if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                    } else if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) {
                         MenuItem_Click(GetByUid(NotifyIconMenu, App.Settings.QuickStart.RightClick_Shift), null);
-                    else
+                    } else {
                         e.Handled = false;
+                    }
                 }
                 break;
                 default:
@@ -253,10 +274,14 @@ namespace ConvertZZ {
             }
         }
         private async void MenuItem_Click(object sender, RoutedEventArgs e) {
-            if (sender == null)
+            if (sender == null) {
                 return;
-            if (((MenuItem)sender).Uid == null)
+            }
+
+            if (((MenuItem)sender).Uid == null) {
                 return;
+            }
+
             string clip = ClipBoardHelper.GetClipBoard_UnicodeText();
             if (!string.IsNullOrWhiteSpace((string)(((MenuItem)sender).ToolTip))) {
                 clip = (string)(((MenuItem)sender).ToolTip);
@@ -267,23 +292,27 @@ namespace ConvertZZ {
             try {
                 switch (((MenuItem)sender).Uid) {
                     case "1":
-                        this.Visibility = this.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
+                        Visibility = Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
                         break;
                     case "a1":
                         if (App.Settings.RecognitionEncoding) {
                             int encodingtype = EncodingAnalyzer.Analyze(clip);
-                            if (encodingtype == 0 || encodingtype == 1)
-                                if (MessageBox.Show(this, "編碼似乎已是Big5，繼續轉換?", "警告", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                            if (encodingtype == 0 || encodingtype == 1) {
+                                if (MessageBox.Show(this, "編碼似乎已是Big5，繼續轉換?", "警告", MessageBoxButton.YesNo) == MessageBoxResult.No) {
                                     return;
+                                }
+                            }
                         }
                         clip = await ConvertHelper.ConvertAsync(clip, new Encoding[2] { Encoding.GetEncoding("GBK"), Encoding.GetEncoding("BIG5") }, 1);
                         break;
                     case "a2":
                         if (App.Settings.RecognitionEncoding) {
                             int encodingtype = EncodingAnalyzer.Analyze(clip);
-                            if (encodingtype == 2 || encodingtype == 3)
-                                if (MessageBox.Show(this, "編碼似乎已是GBK，繼續轉換?", "警告", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                            if (encodingtype == 2 || encodingtype == 3) {
+                                if (MessageBox.Show(this, "編碼似乎已是GBK，繼續轉換?", "警告", MessageBoxButton.YesNo) == MessageBoxResult.No) {
                                     return;
+                                }
+                            }
                         }
                         clip = await ConvertHelper.ConvertAsync(clip, new Encoding[] { Encoding.GetEncoding("BIG5"), Encoding.GetEncoding("GBK") }, 2);
                         break;
@@ -370,10 +399,11 @@ namespace ConvertZZ {
                                 //如果長度為1則試圖轉換UNICODE回字符，若失敗則使用原本的字元
                                 if (i != tmp.Length - 1) {
                                     try {
-                                        if (tmp2[0].StartsWith("x"))
+                                        if (tmp2[0].StartsWith("x")) {
                                             sb.Append(Convert.ToChar(Convert.ToInt32(tmp2[0].Substring(1, tmp2[0].Length - 1), 16)).ToString());
-                                        else
+                                        } else {
                                             sb.Append(Convert.ToChar(Convert.ToInt32(int.Parse(tmp2[0]))).ToString());
+                                        }
                                     } catch {
                                         sb.Append(tmp2[0]);
                                     }
@@ -385,10 +415,11 @@ namespace ConvertZZ {
                                 //若長度為2，則第一項不處理，只處理第二項即可
                                 sb.Append(tmp2[0]);
                                 var g = Convert.ToInt32(tmp2[1].Substring(1, tmp2[1].Length - 1), 16);
-                                if (tmp2[1].StartsWith("x"))
+                                if (tmp2[1].StartsWith("x")) {
                                     sb.Append(Convert.ToChar(Convert.ToInt32(tmp2[1].Substring(1, tmp2[1].Length - 1), 16)).ToString());
-                                else
+                                } else {
                                     sb.Append(Convert.ToChar(Convert.ToInt32(tmp2[1])).ToString());
+                                }
                             }
                         }
                         clip = sb.ToString();
@@ -459,7 +490,7 @@ namespace ConvertZZ {
                         break;
                     default:
                         if (App.Settings.Prompt && !(((MenuItem)sender).Visibility == Visibility.Hidden && (App.Settings.HotKey.AutoCopy || App.Settings.HotKey.AutoPaste))) {
-                            ContextMenu NotifyIconMenu = (ContextMenu)this.FindResource("NotifyIconMenu");
+                            ContextMenu NotifyIconMenu = (ContextMenu)FindResource("NotifyIconMenu");
                             string ItemInfo = ((MenuItem)GetByUid(NotifyIconMenu, ((MenuItem)sender).Uid)).Header.ToString();
                             new Toast(string.Format("轉換完成\r\n耗時：{0} ms", sw.ElapsedMilliseconds)).Show();
                         }
@@ -472,17 +503,23 @@ namespace ConvertZZ {
 
         public static UIElement GetByUid(DependencyObject rootElement, string uid) {
             foreach (UIElement element in LogicalTreeHelper.GetChildren(rootElement).OfType<UIElement>()) {
-                if (element as MenuItem != null)
+                if (element as MenuItem != null) {
                     if ((element as MenuItem).Items.Count > 0) {
                         UIElement resoult = GetByUid(element, uid);
-                        if (resoult != null)
+                        if (resoult != null) {
                             return resoult;
+                        }
                     }
-                if (element.Uid == uid)
+                }
+
+                if (element.Uid == uid) {
                     return element;
+                }
+
                 UIElement resultChildren = GetByUid(element, uid);
-                if (resultChildren != null)
+                if (resultChildren != null) {
                     return resultChildren;
+                }
             }
             return null;
         }
@@ -495,8 +532,9 @@ namespace ConvertZZ {
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            if (!App.Settings.AssistiveTouch)
-                this.Visibility = Visibility.Hidden;
+            if (!App.Settings.AssistiveTouch) {
+                Visibility = Visibility.Hidden;
+            }
         }
     }
 

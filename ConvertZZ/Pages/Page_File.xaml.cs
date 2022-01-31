@@ -32,8 +32,10 @@ namespace ConvertZZ.Pages {
             Combobox_Filter.SelectedIndex = 0;
         }
         public Page_File(string[] FileNames) : this() {
-            if (FileNames == null)
+            if (FileNames == null) {
                 return;
+            }
+
             OutputPath = Path.GetDirectoryName(FileNames.First());
             ImportFileNames(FileNames);
             Combobox_Filter_SelectionChanged(Combobox_Filter, null);
@@ -60,9 +62,9 @@ namespace ConvertZZ.Pages {
 
         CancellationTokenSource cts = new CancellationTokenSource();
         private async void Button_Convert_ClickAsync(object sender, RoutedEventArgs e) {
-            if ((string)((Button)e.Source).Content == "停止中...")
+            if ((string)((Button)e.Source).Content == "停止中...") {
                 return;
-            else if ((string)((Button)e.Source).Content == "停止") {
+            } else if ((string)((Button)e.Source).Content == "停止") {
                 cts.Cancel();
                 ((Button)e.Source).Content = "停止中...";
                 return;
@@ -104,8 +106,9 @@ namespace ConvertZZ.Pages {
                                     case Moudle.Window_MessageBoxEx.MessageBoxExResult.NONE:
                                         continue;
                                 }
-                            } else
+                            } else {
                                 continue;
+                            }
                         }
                         _temp.IsReplace = true;
                     }
@@ -188,9 +191,9 @@ namespace ConvertZZ.Pages {
                 }
                 break;
             }
-            if (AppendLog.Length != 0)
+            if (AppendLog.Length != 0) {
                 Window_MessageBoxEx.ShowDialog(AppendLog.ToString(), "轉換過程中出現錯誤", "我知道了");
-            else if (App.Settings.Prompt) {
+            } else if (App.Settings.Prompt) {
                 new Toast(string.Format("轉換完成\r\n耗時：{0} ms", stopwatch.ElapsedMilliseconds)).Show();
             }
             ResetConvertButton((Button)e.Source);
@@ -234,10 +237,12 @@ namespace ConvertZZ.Pages {
             return temp;
         }
         private string GetParentSum(Node node, ref string sum) {
-            if (node.Generation != 1)
+            if (node.Generation != 1) {
                 sum = Path.Combine(Path.Combine(sum, GetParentSum((Node)node.Parent, ref sum)), node.DisplayName);
-            else if (node.Generation == 1)
+            } else if (node.Generation == 1) {
                 return node.DisplayName;
+            }
+
             return sum;
         }
         private void GetPathParts(Node node, ref Dictionary<string, string> sum) {
@@ -264,8 +269,10 @@ namespace ConvertZZ.Pages {
             OpenFileDialog fileDialog = new OpenFileDialog() { Multiselect = true, CheckFileExists = false, CheckPathExists = true, ValidateNames = false };
             fileDialog.InitialDirectory = App.Settings.FileConvert.DefaultPath;
             fileDialog.FileName = "　";
-            if (FileMode)
+            if (FileMode) {
                 fileDialog.Filter = Combobox_Filter.SelectedValue.ToString();
+            }
+
             if (fileDialog.ShowDialog() == true) {
                 OutputPath = Path.GetDirectoryName(fileDialog.FileNames.First());
                 if (!FileMode) {
@@ -336,8 +343,10 @@ namespace ConvertZZ.Pages {
         List<Node> treeview_nodes = new List<Node>();
         Dictionary<string, string> PathParts = new Dictionary<string, string>();
         private void Treeview_CheckedChanged(object sender, PropertyChangedEventArgs e) {
-            if (e.PropertyName != nameof(Node.IsChecked))
+            if (e.PropertyName != nameof(Node.IsChecked)) {
                 return;
+            }
+
             var r = ConvertFolderAndFileName(false);
             InputPreviewText = r[0];
             OutputPreviewText = r[1];
@@ -384,17 +393,19 @@ namespace ConvertZZ.Pages {
             InputText = sb.ToString();
             if (PathParts == null) {
                 OutputText = "轉換時出現錯誤，請檢查網路及設定";
-                if (Rename)
+                if (Rename) {
                     throw new NullReferenceException(OutputText);
-                else
+                } else {
                     return new string[] { InputText, OutputText };
+                }
             }
 
 
             var treeview_nodes_output = treeview_nodes.Select(x => x.Clone() as Node).ToList();
             string RenameError = RenameFolderAndFileName(treeview_nodes_output, PathParts, Rename);
-            if (!string.IsNullOrWhiteSpace(RenameError))
+            if (!string.IsNullOrWhiteSpace(RenameError)) {
                 AppendLog.AppendLine(RenameError);
+            }
 
             foreach (var x in treeview_nodes_output) {
                 if (x.Nodes != null) {
@@ -410,8 +421,10 @@ namespace ConvertZZ.Pages {
             if (AppendLog.Length != 0) {
                 Window_MessageBoxEx.ShowDialog(AppendLog.ToString(), "轉換過程中出現錯誤", "我知道了");
                 OutputText = "";
-            } else
+            } else {
                 OutputText = sb2.ToString();
+            }
+
             return new string[] { InputText, OutputText };
         }
 
@@ -425,20 +438,23 @@ namespace ConvertZZ.Pages {
                         string newpath = Path.Combine(Path.GetDirectoryName(path), GetNewDisplayName(x.IsFile, Path.GetFileName(path)));
                         try {
                             if (path != newpath) {
-                                if (x.IsFile)
+                                if (x.IsFile) {
                                     File.Move(path, newpath);
-                                else
+                                } else {
                                     Directory.Move(path, newpath);
+                                }
                             }
                         } catch (Exception ex) {
                             @string.AppendLine($"[Error][{ex.Message}]StackTrace: {ex.StackTrace}");
                         }
                     }
 
-                    if (x.Generation == 1)
+                    if (x.Generation == 1) {
                         x.DisplayName = Path.Combine(Path.GetDirectoryName(x.DisplayName), GetNewDisplayName(x.IsFile, Path.GetFileName(x.DisplayName)));
-                    else
+                    } else {
                         x.DisplayName = GetNewDisplayName(x.IsFile, x.DisplayName);
+                    }
+
                     string GetNewDisplayName(bool IsFile, string FileName) {
                         return IsFile ? MakeFilenameValid(Dictionary[FileName]) : MakeFoldernameValid(Dictionary[FileName]);
                     }
@@ -578,9 +594,11 @@ namespace ConvertZZ.Pages {
                 return;
             }
             App.Settings.FileConvert.GetExtentionArray((sender as ComboBox).SelectedValue.ToString()).ForEach(x => {
-                foreach (var t in FileListTemp)
-                    if (App.Settings.FileConvert.CheckExtension(t.Name, x))
+                foreach (var t in FileListTemp) {
+                    if (App.Settings.FileConvert.CheckExtension(t.Name, x)) {
                         temp.Add(t);
+                    }
+                }
             });
             FileList = new ObservableCollection<FileList_Line>(temp.Distinct());
         }
@@ -591,17 +609,21 @@ namespace ConvertZZ.Pages {
         }
         #region
         private static string MakeFilenameValid(string filename) {
-            if (filename == null)
+            if (filename == null) {
                 throw new ArgumentNullException();
+            }
 
-            if (filename.EndsWith("."))
+            if (filename.EndsWith(".")) {
                 filename = Regex.Replace(filename, @"\.+$", "");
+            }
 
-            if (filename.Length == 0)
+            if (filename.Length == 0) {
                 throw new ArgumentException();
+            }
 
-            if (filename.Length > 245)
+            if (filename.Length > 245) {
                 filename = filename.Take(245).ToString();
+            }
 
             foreach (char c in System.IO.Path.GetInvalidFileNameChars()) {
                 filename = filename.Replace(c, '_');
@@ -611,17 +633,21 @@ namespace ConvertZZ.Pages {
         }
 
         private static string MakeFoldernameValid(string foldername) {
-            if (foldername == null)
+            if (foldername == null) {
                 throw new ArgumentNullException();
+            }
 
-            if (foldername.EndsWith("."))
+            if (foldername.EndsWith(".")) {
                 foldername = Regex.Replace(foldername, @"\.+$", "");
+            }
 
-            if (foldername.Length == 0)
+            if (foldername.Length == 0) {
                 throw new ArgumentException();
+            }
 
-            if (foldername.Length > 245)
+            if (foldername.Length > 245) {
                 foldername = foldername.Take(245).ToString();
+            }
 
             foreach (char c in System.IO.Path.GetInvalidPathChars()) {
                 foldername = foldername.Replace(c, '_');

@@ -23,14 +23,19 @@ namespace ConvertZZ.Moudle {
         /// <param name="VocabularyCorrection">-1: 依照設定值變動 0:不使用辭典轉換 1:使用辭典轉換</param>
         /// <returns></returns>
         public static async Task<string> ConvertAsync(string origin, int ToChinese, int VocabularyCorrection = -1) {
-            if (String.IsNullOrWhiteSpace(origin))
+            if (String.IsNullOrWhiteSpace(origin)) {
                 return origin;
+            }
+
             if (App.Settings.Engine == Enum_Engine.Local && App.DictionaryStatus != Enum_DictionaryStatus.Loaded) {
-                if (App.DictionaryStatus == Enum_DictionaryStatus.NotLoad || App.DictionaryStatus == Enum_DictionaryStatus.Error)
+                if (App.DictionaryStatus == Enum_DictionaryStatus.NotLoad || App.DictionaryStatus == Enum_DictionaryStatus.Error) {
                     await App.LoadDictionary(Enum_Engine.Local);
+                }
+
                 System.Threading.SpinWait.SpinUntil(() => App.DictionaryStatus == Enum_DictionaryStatus.Loaded, 30000);
-                if (App.DictionaryStatus != Enum_DictionaryStatus.Loaded)
+                if (App.DictionaryStatus != Enum_DictionaryStatus.Loaded) {
                     throw new Exception("詞彙修正的Dictionary載入失敗");
+                }
             }
             if ((App.Settings.VocabularyCorrection && VocabularyCorrection != 0) || VocabularyCorrection == 1) {
                 if (App.Settings.Engine == Enum_Engine.Local) {
@@ -78,8 +83,10 @@ namespace ConvertZZ.Moudle {
         /// <param name="VocabularyCorrection">-1: 依照設定值變動 0:不使用辭典轉換 1:使用辭典轉換</param>
         /// <returns></returns>
         public static async Task<string> ConvertAsync(string origin, Encoding[] encoding, int ToChinese, int VocabularyCorrection = -1) {
-            if (String.IsNullOrWhiteSpace(origin))
+            if (String.IsNullOrWhiteSpace(origin)) {
                 return origin;
+            }
+
             switch (ToChinese) {
                 case 1:
                     return await ConvertAsync(encoding[0].GetString(encoding[1].GetBytes(origin)), ToChinese);
@@ -104,8 +111,9 @@ namespace ConvertZZ.Moudle {
             }
             list_Output = output.Split(new string[] { "\r\n" }, StringSplitOptions.None).ToList();
             if (list_Input.Count == list_Output.Count && list_Input.Count == PathParts.Count || input == "") {
-                for (int i = 0; i < list_Input.Count; i++)
+                for (int i = 0; i < list_Input.Count; i++) {
                     PathParts[list_Input[i]] = list_Output[i];
+                }
             } else {
                 throw new Exception("使用詞彙修正時出現錯誤，請勿使用有換行符號的字典");
             }
@@ -116,17 +124,21 @@ namespace ConvertZZ.Moudle {
             if (ToChinese == 0) {
                 //經研究，ConvertZ在轉檔案時，做了一些小動作，他會先把原本big5顯示不出來的字轉成繁體，證據是'软'都變成'軟'了
                 StringBuilder sb = new StringBuilder(origin.Length);
-                foreach (char c in origin.ToCharArray())
+                foreach (char c in origin.ToCharArray()) {
                     if (encoding[1].GetChars(encoding[1].GetBytes(new char[] { c }))[0] != c) {
                         sb.Append(App.ChineseConverter.ToTraditional(new String(c, 1)));
-                    } else
+                    } else {
                         sb.Append(c);
+                    }
+                }
+
                 origin = sb.ToString();
             }
-            if (encoding[1] == Encoding.Default || encoding[1] == Encoding.UTF8 || encoding[1] == Encoding.Unicode || encoding[1] == Encoding.GetEncoding("UnicodeFFFE") || encoding[0] == encoding[1])
+            if (encoding[1] == Encoding.Default || encoding[1] == Encoding.UTF8 || encoding[1] == Encoding.Unicode || encoding[1] == Encoding.GetEncoding("UnicodeFFFE") || encoding[0] == encoding[1]) {
                 return await ConvertAsync(origin, ToChinese, VocabularyCorrection);
-            else
+            } else {
                 return await ConvertAsync(origin, new Encoding[2] { Encoding.Default, encoding[1] }, ToChinese, VocabularyCorrection);
+            }
         }
 
         /// <summary>
