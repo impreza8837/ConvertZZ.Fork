@@ -17,17 +17,17 @@ using static Fanhuaji_API.Fanhuaji;
 
 namespace ConvertZZ.Pages {
     /// <summary>
-    /// Page_AudioTags.xaml 的互動邏輯
+    /// AudioTagsConverView.xaml 的互動邏輯
     /// </summary>
-    public partial class Page_AudioTags : Page, INotifyPropertyChanged {
-        public Page_AudioTags(Format format) {
+    public partial class AudioTagsConverView : Page, INotifyPropertyChanged {
+        public AudioTagsConverView(Format format) {
             InitializeComponent();
             DataContext = this;
             ComboBox_ID3v2_Version_SelectionChanged(Combobox_Encoding_ID3v2, null);
             Combobox_Filter.ItemsSource = App.Settings.FileConvert.GetFilterList();
             Combobox_Filter.SelectedIndex = 0;
         }
-        public Page_AudioTags(Format format, string[] FileNames) : this(format) {
+        public AudioTagsConverView(Format format, string[] FileNames) : this(format) {
             if (FileNames == null) {
                 return;
             }

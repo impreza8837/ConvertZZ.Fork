@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 using ConvertZZ.Models;
 
-using static ConvertZZ.Pages.Page_AudioTags;
+using static ConvertZZ.Pages.AudioTagsConverView;
 using static Fanhuaji_API.Fanhuaji;
 
 namespace ConvertZZ.Views {
@@ -44,8 +44,8 @@ namespace ConvertZZ.Views {
                         StreamString ss = new StreamString(pipeServer);
                         string[] Args = (await ss.ReadStringAsync()).Split('|');
 
-                        Window_DialogHost window_DialogHost = new Window_DialogHost(Args[0] == "/file" ? Enums.Enum_Mode.Mode.File_FileName : Enums.Enum_Mode.Mode.AutioTag, Args.Skip(1).ToArray());
-                        window_DialogHost.Show();
+                        DialogHostView DialogHostView = new DialogHostView(Args[0] == "/file" ? Enums.Enum_Mode.Mode.File_FileName : Enums.Enum_Mode.Mode.AutioTag, Args.Skip(1).ToArray());
+                        DialogHostView.Show();
 
                         await ss.WriteStringAsync("ACK");
                         pipeServer.WaitForPipeDrain();
@@ -132,18 +132,18 @@ namespace ConvertZZ.Views {
             }
         }
         private void About_Click(object sender, RoutedEventArgs e) {
-            Window_About window_About = new Window_About();
-            window_About.ShowDialog();
+            AboutView AboutView = new AboutView();
+            AboutView.ShowDialog();
         }
         private void Report_Click(object sender, RoutedEventArgs e) {
-            Window_Report window_Report = new Window_Report();
-            window_Report.ShowDialog();
+            ReportView ReportView = new ReportView();
+            ReportView.ShowDialog();
         }
         private void Setting_Click(object sender, RoutedEventArgs e) {
             UnRegAllHotkey();
             Topmost = false;
-            Window_Setting window_Setting = new Window_Setting() { Owner = this };
-            window_Setting.ShowDialog();
+            SettingsView SettingsView = new SettingsView() { Owner = this };
+            SettingsView.ShowDialog();
             Topmost = true;
             RegAllHotkey();
         }
@@ -202,8 +202,8 @@ namespace ConvertZZ.Views {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
                 //減去輔助鍵，得到現在是左鍵還是右鍵
                 dragDropKeyStates -= e.KeyStates;
-                Pages.Page_File page_File = new Pages.Page_File();
-                page_File.Button_Convert_Click(null, null);
+                Pages.FileConverView FileConverView = new Pages.FileConverView();
+                FileConverView.Button_Convert_Click(null, null);
                 if (dragDropKeyStates == DragDropKeyStates.LeftMouseButton)
                 {
                     switch (e.KeyStates)
@@ -323,24 +323,24 @@ namespace ConvertZZ.Views {
                         clip = await ConvertHelper.ConvertAsync(clip, 2);
                         break;
                     case "b1":
-                        Window_DialogHost window_File_FileNameConverter = new Window_DialogHost(Enums.Enum_Mode.Mode.File_FileName);
+                        DialogHostView window_File_FileNameConverter = new DialogHostView(Enums.Enum_Mode.Mode.File_FileName);
                         window_File_FileNameConverter.Show();
                         break;
                     case "b2":
-                        Window_DialogHost window_ClipBoard_Converter = new Window_DialogHost(Enums.Enum_Mode.Mode.ClipBoard);
+                        DialogHostView window_ClipBoard_Converter = new DialogHostView(Enums.Enum_Mode.Mode.ClipBoard);
                         window_ClipBoard_Converter.Show();
                         break;
                     case "c1":
-                        Window_DialogHost Window_DialogHost = new Window_DialogHost(Enums.Enum_Mode.Mode.AutioTag, Format.ID3);
-                        Window_DialogHost.Show();
+                        DialogHostView DialogHostView = new DialogHostView(Enums.Enum_Mode.Mode.AutioTag, Format.ID3);
+                        DialogHostView.Show();
                         break;
                     case "c2":
-                        Window_DialogHost Window_DialogHost2 = new Window_DialogHost(Enums.Enum_Mode.Mode.AutioTag, Format.APE);
-                        Window_DialogHost2.Show();
+                        DialogHostView DialogHostView2 = new DialogHostView(Enums.Enum_Mode.Mode.AutioTag, Format.APE);
+                        DialogHostView2.Show();
                         break;
                     case "c3":
-                        Window_DialogHost Window_DialogHost3 = new Window_DialogHost(Enums.Enum_Mode.Mode.AutioTag, Format.OGG);
-                        Window_DialogHost3.Show();
+                        DialogHostView DialogHostView3 = new DialogHostView(Enums.Enum_Mode.Mode.AutioTag, Format.OGG);
+                        DialogHostView3.Show();
                         break;
                     case "za1":
                         foreach (char c in clip) {

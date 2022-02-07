@@ -22,17 +22,17 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace ConvertZZ.Pages {
     /// <summary>
-    /// Page_File.xaml 的互動邏輯
+    /// FileConverView.xaml 的互動邏輯
     /// </summary>
-    public partial class Page_File : Page, INotifyPropertyChanged {
-        public Page_File() {
+    public partial class FileConverView : Page, INotifyPropertyChanged {
+        public FileConverView() {
             InitializeComponent();
             DataContext = this;
             OutputPath = App.Settings.FileConvert.DefaultPath.Substring(App.Settings.FileConvert.DefaultPath[0] == '!' ? 1 : 0);
             Combobox_Filter.ItemsSource = App.Settings.FileConvert.GetFilterList();
             Combobox_Filter.SelectedIndex = 0;
         }
-        public Page_File(string[] FileNames) : this() {
+        public FileConverView(string[] FileNames) : this() {
             if (FileNames == null) {
                 return;
             }

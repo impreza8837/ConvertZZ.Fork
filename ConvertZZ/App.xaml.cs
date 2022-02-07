@@ -44,8 +44,8 @@ namespace ConvertZZ {
                         hwndTest = ps.Where(x => x.StartTime.Ticks == mini).First().Handle;
                     } else {
                         ShowUI();
-                        Window_DialogHost window_DialogHost = new Window_DialogHost(e.Args[0] == "/file" ? Enum_Mode.Mode.File_FileName : Enum_Mode.Mode.AutioTag, e.Args.Skip(1).ToArray());
-                        window_DialogHost.Show();
+                        DialogHostView DialogHostView = new DialogHostView(e.Args[0] == "/file" ? Enum_Mode.Mode.File_FileName : Enum_Mode.Mode.AutioTag, e.Args.Skip(1).ToArray());
+                        DialogHostView.Show();
                         return;
                     }
                     try {

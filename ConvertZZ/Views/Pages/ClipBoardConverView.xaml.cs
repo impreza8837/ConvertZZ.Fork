@@ -14,11 +14,11 @@ using static Fanhuaji_API.Fanhuaji;
 
 namespace ConvertZZ.Pages {
     /// <summary>
-    /// Page_ClipBoard.xaml 的互動邏輯
+    /// ClipBoardConverView.xaml 的互動邏輯
     /// </summary>
-    public partial class Page_ClipBoard : Page, INotifyPropertyChanged {
+    public partial class ClipBoardConverView : Page, INotifyPropertyChanged {
         IntPtr hwnd = IntPtr.Zero;
-        public Page_ClipBoard(IntPtr hwnd) {
+        public ClipBoardConverView(IntPtr hwnd) {
             this.hwnd = hwnd;
             InitializeComponent();
             DataContext = this;
