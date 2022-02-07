@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace ConvertZZ {
+namespace ConvertZZ.Views.Controls {
     /// <summary>
     /// CheckboxTreeView.xaml 的互動邏輯
     /// </summary>
@@ -14,10 +14,12 @@ namespace ConvertZZ {
             DataContext = this;
             InitializeComponent();
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
 
         public delegate void CheckedChangedEventHandler(CheckBox sender);
+
         public event CheckedChangedEventHandler CheckedChanged;
 
         public IList<Node> ItemSources {
@@ -28,6 +30,7 @@ namespace ConvertZZ {
             CheckedChanged?.Invoke(sender as CheckBox);
         }
     }
+
     public class Node : INotifyPropertyChanged, ICloneable {
         public Node(Node Parent) {
             if (Parent == null) {

@@ -32,7 +32,7 @@ namespace ConvertZZ.Moudle {
             } else {
                 this.CheckBox_Text = CheckBox_Text;
             }
-            base.DataContext = this;
+            DataContext = this;
             InitializeComponent();
             Title = Caption;
         }
@@ -86,7 +86,7 @@ namespace ConvertZZ.Moudle {
         public string CheckBox_Text {
             get => _CheckBox_Text; set {
                 _CheckBox_Text = value;
-                CheckBox_Visibility = (String.IsNullOrEmpty(value) ? Visibility.Collapsed : Visibility.Visible);
+                CheckBox_Visibility = (string.IsNullOrEmpty(value) ? Visibility.Collapsed : Visibility.Visible);
             }
         }
         public Visibility CheckBox_Visibility { get; set; } = Visibility.Collapsed;

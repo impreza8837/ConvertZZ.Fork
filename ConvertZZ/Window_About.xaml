@@ -21,7 +21,7 @@
                   Height="150"
                   MouseUp="Label_MouseUp">
                 <Grid.Background>
-                    <ImageBrush ImageSource="icon.ico"
+                    <ImageBrush ImageSource="\Assets\Icon.ico"
                                 Stretch="Uniform" />
                 </Grid.Background>
             </Grid>

@@ -37,7 +37,7 @@ namespace ConvertZZ {
         /// <returns>轉換後的簡體字：體</returns> 
         public string ToSimplified(string pSource) {
             pSource = FR_Reserved.ReplaceAll(pSource);
-            String tTarget = new String(' ', pSource.Length);
+            string tTarget = new string(' ', pSource.Length);
             int tReturn = LCMapStringEx(LOCALE_SYSTEM_DEFAULT, LCMAP_SIMPLIFIED_CHINESE, pSource, pSource.Length, tTarget, pSource.Length);
             tTarget = FRRevert_Reserved.ReplaceAll(tTarget);
             return tTarget;
@@ -50,7 +50,7 @@ namespace ConvertZZ {
         /// <returns>轉換後的簡體字：體</returns> 
         public string ToTraditional(string pSource) {
             pSource = FR_Reserved.ReplaceAll(pSource);
-            String tTarget = new String(' ', pSource.Length);
+            string tTarget = new string(' ', pSource.Length);
             int tReturn = LCMapStringEx(LOCALE_SYSTEM_DEFAULT, LCMAP_TRADITIONAL_CHINESE, pSource, pSource.Length, tTarget, pSource.Length);
             tTarget = FRRevert_Reserved.ReplaceAll(tTarget);
             return tTarget;

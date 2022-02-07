@@ -14,7 +14,7 @@ using ConvertZZ.Moudle;
 using static ConvertZZ.Pages.Page_AudioTags;
 using static Fanhuaji_API.Fanhuaji;
 
-namespace ConvertZZ {
+namespace ConvertZZ.Views {
     /// <summary>
     /// MainWindow.xaml 的互動邏輯
     /// </summary>
@@ -471,10 +471,10 @@ namespace ConvertZZ {
                         clip = Encoding.GetEncoding("BIG5").GetString(Encoding.GetEncoding("hz-gb-2312").GetBytes(clip));
                         break;
                     case "ze1":
-                        clip = Moudle.ConvertHelper.ConvertSymbol(clip, 0);
+                        clip = ConvertHelper.ConvertSymbol(clip, 0);
                         break;
                     case "ze2":
-                        clip = Moudle.ConvertHelper.ConvertSymbol(clip, 1);
+                        clip = ConvertHelper.ConvertSymbol(clip, 1);
                         break;
                 }
                 ClipBoardHelper.SetClipBoard_UnicodeText(clip);

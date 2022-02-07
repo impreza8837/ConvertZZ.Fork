@@ -393,11 +393,11 @@ namespace ConvertZZ {
     }
 
     public partial class Settings {
-        public static Settings FromJson(string json) => JsonConvert.DeserializeObject<Settings>(json, ConvertZZ.Converter.Settings);
+        public static Settings FromJson(string json) => JsonConvert.DeserializeObject<Settings>(json, Converter.Settings);
     }
 
     public static class Serialize {
-        public static string ToJson(this Settings self) => JsonConvert.SerializeObject(self, Formatting.Indented, ConvertZZ.Converter.Settings);
+        public static string ToJson(this Settings self) => JsonConvert.SerializeObject(self, Formatting.Indented, Converter.Settings);
     }
 
     internal class Converter {

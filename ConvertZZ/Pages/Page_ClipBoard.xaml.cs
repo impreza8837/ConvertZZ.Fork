@@ -78,7 +78,7 @@ namespace ConvertZZ.Pages {
                 Output = await ConvertHelper.ConvertAsync(ClipBoard, encoding, ToChinese);
             } catch (FanhuajiException val) {
                 FanhuajiException fe = val;
-                Window_MessageBoxEx.ShowDialog(((Exception)fe).Message, "繁化姬API", "確定");
+                Window_MessageBoxEx.ShowDialog(fe.Message, "繁化姬API", "確定");
             }
         }
 

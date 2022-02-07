@@ -87,13 +87,13 @@ namespace ConvertZZ {
                 ShortchuName = Shortcut_Audio;
                 arg = "/audio";
             }
-            if (Moudle.Window_MessageBoxEx.ShowDialog($"添加\"{ShortchuName}\"捷徑至傳送到", "建立捷徑", "是", "否") == Moudle.Window_MessageBoxEx.MessageBoxExResult.A) {
+            if (Window_MessageBoxEx.ShowDialog($"添加\"{ShortchuName}\"捷徑至傳送到", "建立捷徑", "是", "否") == Window_MessageBoxEx.MessageBoxExResult.A) {
                 string ShortcutPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.SendTo), $"{ShortchuName}.lnk");
                 if (File.Exists(ShortcutPath)) {
                     File.Delete(ShortcutPath);
                 }
 
-                Moudle.Shortcut.Create(ShortcutPath, System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName, arg, AppDomain.CurrentDomain.BaseDirectory, "簡繁轉換工具", "", "");
+                Shortcut.Create(ShortcutPath, System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName, arg, AppDomain.CurrentDomain.BaseDirectory, "簡繁轉換工具", "", "");
                 new Toast("捷徑已建立").Show();
                 CreateShortcutVisibility = Visibility.Hidden;
             }

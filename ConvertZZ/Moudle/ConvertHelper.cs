@@ -23,7 +23,7 @@ namespace ConvertZZ.Moudle {
         /// <param name="VocabularyCorrection">-1: 依照設定值變動 0:不使用辭典轉換 1:使用辭典轉換</param>
         /// <returns></returns>
         public static async Task<string> ConvertAsync(string origin, int ToChinese, int VocabularyCorrection = -1) {
-            if (String.IsNullOrWhiteSpace(origin)) {
+            if (string.IsNullOrWhiteSpace(origin)) {
                 return origin;
             }
 
@@ -52,10 +52,10 @@ namespace ConvertZZ.Moudle {
                     return origin;
                 } else if (App.Settings.Engine == Enum_Engine.Fanhuaji) {
                     if (ToChinese != 0) {
-                        if (!Fanhuaji.CheckConnection()) {
+                        if (!CheckConnection()) {
                             throw new FanhuajiException("無法連線至繁化姬，請確認連線狀態");
                         }
-                        Callback callback = await App.Fanhuaji.ConvertAsync(origin, (ToChinese == 1) ? App.Settings.Fanhuaji_Setting.Converter_S_to_T : App.Settings.Fanhuaji_Setting.Converter_T_to_S, (Config)App.Settings.Fanhuaji_Setting);
+                        Callback callback = await App.Fanhuaji.ConvertAsync(origin, (ToChinese == 1) ? App.Settings.Fanhuaji_Setting.Converter_S_to_T : App.Settings.Fanhuaji_Setting.Converter_T_to_S, App.Settings.Fanhuaji_Setting);
                         if (callback.Code != 0) {
                             throw new FanhuajiException("使用繁化姬時出現一些意料外的錯誤");
                         }
@@ -83,7 +83,7 @@ namespace ConvertZZ.Moudle {
         /// <param name="VocabularyCorrection">-1: 依照設定值變動 0:不使用辭典轉換 1:使用辭典轉換</param>
         /// <returns></returns>
         public static async Task<string> ConvertAsync(string origin, Encoding[] encoding, int ToChinese, int VocabularyCorrection = -1) {
-            if (String.IsNullOrWhiteSpace(origin)) {
+            if (string.IsNullOrWhiteSpace(origin)) {
                 return origin;
             }
 
@@ -126,7 +126,7 @@ namespace ConvertZZ.Moudle {
                 StringBuilder sb = new StringBuilder(origin.Length);
                 foreach (char c in origin.ToCharArray()) {
                     if (encoding[1].GetChars(encoding[1].GetBytes(new char[] { c }))[0] != c) {
-                        sb.Append(App.ChineseConverter.ToTraditional(new String(c, 1)));
+                        sb.Append(App.ChineseConverter.ToTraditional(new string(c, 1)));
                     } else {
                         sb.Append(c);
                     }

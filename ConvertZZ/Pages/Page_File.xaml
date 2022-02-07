@@ -3,7 +3,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:ConvertZZ="clr-namespace:ConvertZZ"
+      xmlns:vc="clr-namespace:ConvertZZ.Views.Controls"
       x:Class="ConvertZZ.Pages.Page_File"
       mc:Ignorable="d"
       materialDesign:ShadowAssist.CacheMode="{x:Null}"
@@ -74,7 +74,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.ColumnSpan="2">
                     <Grid x:Name="Page1">
-                        <ConvertZZ:CheckBoxTreeView x:Name="treeview" />
+                        <vc:CheckBoxTreeView x:Name="treeview" />
                     </Grid>
                     <Grid x:Name="Page2"
                           Canvas.Top="600">

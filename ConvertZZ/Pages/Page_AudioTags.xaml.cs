@@ -100,7 +100,7 @@ namespace ConvertZZ.Pages {
                     }
                     tfile.Save();
                 } catch (TagLib.UnsupportedFormatException) { ErrorMessage = string.Format("轉換{0}時出現錯誤，該檔案並非音訊檔", _temp.Name); } catch (FanhuajiException val) {
-                    ErrorMessage = ((Exception)val).Message;
+                    ErrorMessage = val.Message;
                     break;
                 } catch { ErrorMessage = string.Format("轉換{0}時出現未知錯誤", _temp.Name); }
             }
@@ -229,12 +229,12 @@ namespace ConvertZZ.Pages {
         private void ImportFileNames(string[] FileNames) {
             string ParentPath = Path.GetDirectoryName(FileNames.First());
             foreach (string str in FileNames) {
-                if ((Path.GetFileNameWithoutExtension(str) == "　" || Directory.Exists(str)) && System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(str))) {
-                    string folderpath = System.IO.Path.GetDirectoryName(str);
+                if ((Path.GetFileNameWithoutExtension(str) == "　" || Directory.Exists(str)) && Directory.Exists(Path.GetDirectoryName(str))) {
+                    string folderpath = Path.GetDirectoryName(str);
                     App.Settings.FileConvert.GetExtentionArray(Combobox_Filter.Text).ForEach(filter => {
-                        List<string> childFileList = System.IO.Directory.GetFiles(folderpath, filter.Trim(), AccordingToChild ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly).Where(x => App.Settings.FileConvert.CheckExtension(x, filter)).ToList();
+                        List<string> childFileList = Directory.GetFiles(folderpath, filter.Trim(), AccordingToChild ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly).Where(x => App.Settings.FileConvert.CheckExtension(x, filter)).ToList();
                         childFileList.ForEach(x => {
-                            FileListTemp.Add(new FileList_Line() { IsChecked = true, IsFile = true, Name = System.IO.Path.GetFileName(x), ParentPath = ParentPath, Path = Path.GetDirectoryName(x) });
+                            FileListTemp.Add(new FileList_Line() { IsChecked = true, IsFile = true, Name = Path.GetFileName(x), ParentPath = ParentPath, Path = Path.GetDirectoryName(x) });
                         });
                     });
                     FileListTemp = new ObservableCollection<FileList_Line>(FileListTemp.OrderBy(x => x.Name).Distinct().OrderBy(x => x.IsFile).OrderBy(x => x.Path));

@@ -6,7 +6,7 @@
     <UseWPF>true</UseWPF>
     <Copyright>Copyright © flier268 2019</Copyright>
     <Version>1.0.0.8</Version>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\Icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="icon.ico" />
-    <None Remove="Windows Logo.png" />
+    <None Remove="Assets\Icon.ico" />
+    <None Remove="Assets\WindowsLogo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,8 +38,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="icon.ico" />
-    <Resource Include="Windows Logo.png" />
+    <Resource Include="Assets\Icon.ico" />
+    <Resource Include="Assets\WindowsLogo.png" />
   </ItemGroup>
 
   <ItemGroup>

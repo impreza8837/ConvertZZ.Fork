@@ -26,10 +26,10 @@ namespace ConvertZZ {
                 if ((from x in App.Settings.Fanhuaji_Setting.Modules
                      where x.ModuleName.ToString() == s
                      select x).Count() == 0) {
-                    App.Settings.Fanhuaji_Setting.Modules.Add(new Module((Enum_Modules)Enum.Parse(typeof(Enum_Modules), s), (bool?)null));
+                    App.Settings.Fanhuaji_Setting.Modules.Add(new Module((Enum_Modules)Enum.Parse(typeof(Enum_Modules), s), null));
                 }
             }
-            base.DataContext = App.Settings.Fanhuaji_Setting;
+            DataContext = App.Settings.Fanhuaji_Setting;
             DataGrid_ReplaceList.DataContext = this;
         }
 
@@ -37,11 +37,11 @@ namespace ConvertZZ {
             if (e.OriginalSource is Border && !((sender as DataGrid).CurrentColumn.DependencyObjectType.Name != "DataGridCheckBoxColumn")) {
                 Module module = ((Border)e.OriginalSource).BindingGroup.Items[0] as Module;
                 if (!module.Enable.HasValue) {
-                    module.Enable = ((bool?)false);
+                    module.Enable = false;
                 } else if (module.Enable == false) {
-                    module.Enable = ((bool?)true);
+                    module.Enable = true;
                 } else {
-                    module.Enable = ((bool?)null);
+                    module.Enable = null;
                 }
             }
         }

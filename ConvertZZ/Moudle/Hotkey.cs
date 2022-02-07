@@ -9,7 +9,7 @@ namespace ConvertZZ.Moudle {
         private static Dictionary<int, HotKey> _dictHotKeyToCalBackProc;
 
         [DllImport("user32.dll")]
-        private static extern bool RegisterHotKey(IntPtr hWnd, int id, UInt32 fsModifiers, UInt32 vlc);
+        private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vlc);
 
         [DllImport("user32.dll")]
         private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
@@ -43,7 +43,7 @@ namespace ConvertZZ.Moudle {
         public bool Register() {
             int virtualKeyCode = KeyInterop.VirtualKeyFromKey(Key);
             Id = virtualKeyCode + ((int)KeyModifiers * 0x10000);
-            bool result = RegisterHotKey(IntPtr.Zero, Id, (UInt32)KeyModifiers, (UInt32)virtualKeyCode);
+            bool result = RegisterHotKey(IntPtr.Zero, Id, (uint)KeyModifiers, (uint)virtualKeyCode);
 
             if (_dictHotKeyToCalBackProc == null) {
                 _dictHotKeyToCalBackProc = new Dictionary<int, HotKey>();
