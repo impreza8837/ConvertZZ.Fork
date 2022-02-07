@@ -20,7 +20,7 @@ using ConvertZZ.Views.Controls;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 
-namespace ConvertZZ.Pages {
+namespace ConvertZZ.Views.Pages {
     /// <summary>
     /// FileConverView.xaml 的互動邏輯
     /// </summary>

@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 using ConvertZZ.Models;
 
-using static ConvertZZ.Pages.AudioTagsConverView;
+using static ConvertZZ.Views.Pages.AudioTagsConverView;
 using static Fanhuaji_API.Fanhuaji;
 
 namespace ConvertZZ.Views {

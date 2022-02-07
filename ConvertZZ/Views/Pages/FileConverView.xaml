@@ -4,7 +4,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:vc="clr-namespace:ConvertZZ.Views.Controls"
-      x:Class="ConvertZZ.Pages.FileConverView"
+      x:Class="ConvertZZ.Views.Pages.FileConverView"
       mc:Ignorable="d"
       materialDesign:ShadowAssist.CacheMode="{x:Null}"
       d:DesignHeight="700"

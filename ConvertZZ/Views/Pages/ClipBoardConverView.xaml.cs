@@ -12,7 +12,7 @@ using ConvertZZ.Models;
 
 using static Fanhuaji_API.Fanhuaji;
 
-namespace ConvertZZ.Pages {
+namespace ConvertZZ.Views.Pages {
     /// <summary>
     /// ClipBoardConverView.xaml 的互動邏輯
     /// </summary>
