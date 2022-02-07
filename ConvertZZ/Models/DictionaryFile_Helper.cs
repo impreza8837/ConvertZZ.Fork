@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConvertZZ.Moudle {
+namespace ConvertZZ.Models {
     public class DictionaryFile_Helper {
         public static async Task<List<Line>> Load(string CSV_Filename) {
             var temp = new List<Line>();

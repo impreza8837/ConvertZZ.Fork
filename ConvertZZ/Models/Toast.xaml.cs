@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 
-namespace ConvertZZ.Moudle {
+namespace ConvertZZ.Models {
     /// <summary>
     /// Toast.xaml 的互動邏輯
     /// </summary>

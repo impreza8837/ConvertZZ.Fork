@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace ConvertZZ.Moudle {
+namespace ConvertZZ.Models {
     public class UpdateChecker {
         public static VersionReport ChecktVersion() {
             try {

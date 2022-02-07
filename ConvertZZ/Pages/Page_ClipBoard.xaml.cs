@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 
-using ConvertZZ.Moudle;
+using ConvertZZ.Models;
 
 using static Fanhuaji_API.Fanhuaji;
 

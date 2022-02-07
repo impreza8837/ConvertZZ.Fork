@@ -14,7 +14,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 
-using ConvertZZ.Moudle;
+using ConvertZZ.Models;
 using ConvertZZ.Views.Controls;
 
 using Microsoft.Win32;

@@ -119,10 +119,10 @@ namespace ConvertZZ {
             { "隱藏/顯示懸浮球" , "1" } ,
             { "GBK>Big5" , "a1" } ,
             { "Big5>GBK" , "a2" } ,
-            { "Unicode簡>Unicode繁" , "a3" } ,
-            { "Unicode繁>Unicode簡" , "a4" } ,
-            { "Unicode>Html Code十進制" , "za1" } ,
-            { "Unicode>Html Code十六進制" , "za2" } ,
+            { "Unicode 簡>Unicode 繁" , "a3" } ,
+            { "Unicode 繁>Unicode 簡" , "a4" } ,
+            { "Unicode>Html Code 十進制" , "za1" } ,
+            { "Unicode>Html Code 十六進制" , "za2" } ,
             { "HTML Code>Unicode" , "za3" } ,
             { "Unicode>GBK" , "zb1" } ,
             { "Unicode>Big5" , "zb2" } ,
@@ -276,7 +276,7 @@ namespace ConvertZZ {
                 return;
             }
 
-            if (Moudle.Window_MessageBoxEx.ShowDialog(Fanhuaji_API.Fanhuaji.Terms_of_Service, "使用繁化姬API須接受以下條約", "我不同意", "我同意") != Moudle.Window_MessageBoxEx.MessageBoxExResult.B) {
+            if (Models.Window_MessageBoxEx.ShowDialog(Fanhuaji_API.Fanhuaji.Terms_of_Service, "使用繁化姬API須接受以下條約", "我不同意", "我同意") != Models.Window_MessageBoxEx.MessageBoxExResult.B) {
                 UseLocalDic = true;
             }
         }

@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 using ConvertZZ.Enums;
 
-using Fanhuaji_API;
 using Fanhuaji_API.Class;
 
 using Flier.Toolbox.Text;
 
 using static Fanhuaji_API.Fanhuaji;
 
-namespace ConvertZZ.Moudle {
+namespace ConvertZZ.Models {
     public class ConvertHelper {
         /// <summary>
         /// 轉換文字
@@ -55,7 +54,7 @@ namespace ConvertZZ.Moudle {
                         if (!CheckConnection()) {
                             throw new FanhuajiException("無法連線至繁化姬，請確認連線狀態");
                         }
-                        Callback callback = await App.Fanhuaji.ConvertAsync(origin, (ToChinese == 1) ? App.Settings.Fanhuaji_Setting.Converter_S_to_T : App.Settings.Fanhuaji_Setting.Converter_T_to_S, App.Settings.Fanhuaji_Setting);
+                        Callback callback = await App.Fanhuaji.ConvertAsync(origin, (ToChinese == 1) ? App.Settings.FanhuajiSettings.Converter_S_to_T : App.Settings.FanhuajiSettings.Converter_T_to_S, App.Settings.FanhuajiSettings);
                         if (callback.Code != 0) {
                             throw new FanhuajiException("使用繁化姬時出現一些意料外的錯誤");
                         }

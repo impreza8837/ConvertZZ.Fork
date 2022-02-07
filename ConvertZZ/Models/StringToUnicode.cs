@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Text;
 
-namespace ConvertZZ.Moudle {
+namespace ConvertZZ.Models {
     public class StringToUnicode {
         public static string TryToConvertLatin1ToUnicode(string str, Encoding encoding) {
             if (CalcRate(str.ToArray(), Latin1) > 0.2) {

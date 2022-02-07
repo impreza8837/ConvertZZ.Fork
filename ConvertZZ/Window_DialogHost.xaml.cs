@@ -8,7 +8,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 
-using ConvertZZ.Moudle;
+using ConvertZZ.Models;
 
 using static ConvertZZ.Enums.Enum_Mode;
 
@@ -75,8 +75,8 @@ namespace ConvertZZ {
                 DragMove();
             }
         }
-        const string Shortcut_File = "ConvertZZ(文件轉換)";
-        const string Shortcut_Audio = "ConvertZZ(Audio標籤轉換)";
+        const string Shortcut_File = "ConvertZZ (文件轉換)";
+        const string Shortcut_Audio = "ConvertZZ (音樂標籤轉換)";
         private void Button_CreateShortCut(object sender, RoutedEventArgs e) {
             string ShortchuName = "";
             string arg = "";
@@ -87,7 +87,8 @@ namespace ConvertZZ {
                 ShortchuName = Shortcut_Audio;
                 arg = "/audio";
             }
-            if (Window_MessageBoxEx.ShowDialog($"添加\"{ShortchuName}\"捷徑至傳送到", "建立捷徑", "是", "否") == Window_MessageBoxEx.MessageBoxExResult.A) {
+
+            if (Window_MessageBoxEx.ShowDialog($"新增\"{ShortchuName}\"捷徑至[傳送到]選單", "建立捷徑", "是", "否") == Window_MessageBoxEx.MessageBoxExResult.A) {
                 string ShortcutPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.SendTo), $"{ShortchuName}.lnk");
                 if (File.Exists(ShortcutPath)) {
                     File.Delete(ShortcutPath);
@@ -112,7 +113,5 @@ namespace ConvertZZ {
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-
     }
 }

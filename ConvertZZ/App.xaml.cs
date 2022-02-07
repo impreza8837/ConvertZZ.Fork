@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 
 using ConvertZZ.Enums;
-using ConvertZZ.Moudle;
+using ConvertZZ.Models;
 using ConvertZZ.Views;
 
 using Fanhuaji_API;

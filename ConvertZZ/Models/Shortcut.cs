@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace ConvertZZ.Moudle {
+namespace ConvertZZ.Models {
     class Shortcut {
         private static Type m_type = Type.GetTypeFromProgID("WScript.Shell");
         private static object m_shell = Activator.CreateInstance(m_type);

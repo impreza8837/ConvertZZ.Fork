@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace ConvertZZ.Moudle {
+namespace ConvertZZ.Models {
     class EncodingAnalyzer {
         /// <summary>
         /// 快速篩選string是BIG5或GBK

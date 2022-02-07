@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 
-namespace ConvertZZ.Moudle {
+namespace ConvertZZ.Models {
     /// <summary>
     /// Window_KeyValueEditor.xaml 的互動邏輯
     /// </summary>

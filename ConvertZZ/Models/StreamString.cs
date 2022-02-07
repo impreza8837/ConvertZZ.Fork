@@ -1,9 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConvertZZ.Moudle {
+namespace ConvertZZ.Models {
     public class StreamString {
         private Stream ioStream;
         private UnicodeEncoding streamEncoding;

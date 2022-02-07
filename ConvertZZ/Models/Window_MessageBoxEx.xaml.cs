@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ConvertZZ.Moudle {
+namespace ConvertZZ.Models {
     /// <summary>
     /// Window_MessageBoxEx.xaml 的互動邏輯
     /// </summary>

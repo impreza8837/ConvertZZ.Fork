@@ -5,8 +5,8 @@ using System.Runtime.CompilerServices;
 using Fanhuaji_API;
 using Fanhuaji_API.Enum;
 
-namespace ConvertZZ.Class {
-    public class Fanhuaji_Config : Config, INotifyPropertyChanged {
+namespace ConvertZZ {
+    public class FanhuajiSettings : Config, INotifyPropertyChanged {
         [ColumnName(Visible: false)]
         public int Converter_T_to_S_Index {
             get {
@@ -64,7 +64,7 @@ namespace ConvertZZ.Class {
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void Notify() {
-            PropertyInfo[] properties = typeof(Fanhuaji_Config).GetProperties();
+            PropertyInfo[] properties = typeof(FanhuajiSettings).GetProperties();
             foreach (PropertyInfo propertyInfo in properties) {
                 OnPropertyChanged(propertyInfo.Name);
             }

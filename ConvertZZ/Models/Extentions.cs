@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ConvertZZ.Moudle {
+namespace ConvertZZ.Models {
     public static class Extentions {
         public static void AddRange<T1, T2>(this Dictionary<T1, T2> Dic, Dictionary<T1, T2> collection, bool Replace = true) {
             if (collection == null) {

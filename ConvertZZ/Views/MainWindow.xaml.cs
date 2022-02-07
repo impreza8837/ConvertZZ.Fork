@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-using ConvertZZ.Moudle;
+using ConvertZZ.Models;
 
 using static ConvertZZ.Pages.Page_AudioTags;
 using static Fanhuaji_API.Fanhuaji;
@@ -19,7 +19,7 @@ namespace ConvertZZ.Views {
     /// MainWindow.xaml 的互動邏輯
     /// </summary>
     public partial class MainWindow : Window {
-        List<Moudle.HotKey> hotKeys = new List<Moudle.HotKey>();
+        List<Models.HotKey> hotKeys = new List<Models.HotKey>();
         CancellationTokenSource Cancellation = new CancellationTokenSource();
         public MainWindow() {
             InitializeComponent();
@@ -62,7 +62,7 @@ namespace ConvertZZ.Views {
                 NotifyIconMenu.IsOpen = true;
             }
         }
-        void HotkeyAction1(Moudle.HotKey hotKey) {
+        void HotkeyAction1(Models.HotKey hotKey) {
             if (App.Settings.HotKey.AutoCopy) {
                 ClipBoardHelper.Copy(hotKey.Key, hotKey.KeyModifiers);
             }
@@ -72,7 +72,7 @@ namespace ConvertZZ.Views {
                 ClipBoardHelper.Paste();
             }
         }
-        void HotkeyAction2(Moudle.HotKey hotKey) {
+        void HotkeyAction2(Models.HotKey hotKey) {
             if (App.Settings.HotKey.AutoCopy) {
                 ClipBoardHelper.Copy(hotKey.Key, hotKey.KeyModifiers);
             }
@@ -82,7 +82,7 @@ namespace ConvertZZ.Views {
                 ClipBoardHelper.Paste();
             }
         }
-        void HotkeyAction3(Moudle.HotKey hotKey) {
+        void HotkeyAction3(Models.HotKey hotKey) {
             if (App.Settings.HotKey.AutoCopy) {
                 ClipBoardHelper.Copy(hotKey.Key, hotKey.KeyModifiers);
             }
@@ -92,7 +92,7 @@ namespace ConvertZZ.Views {
                 ClipBoardHelper.Paste();
             }
         }
-        void HotkeyAction4(Moudle.HotKey hotKey) {
+        void HotkeyAction4(Models.HotKey hotKey) {
             if (App.Settings.HotKey.AutoCopy) {
                 ClipBoardHelper.Copy(hotKey.Key, hotKey.KeyModifiers);
             }
@@ -102,14 +102,14 @@ namespace ConvertZZ.Views {
                 ClipBoardHelper.Paste();
             }
         }
-        private void RegHotkey(Feature feature, Action<Moudle.HotKey> action) {
+        private void RegHotkey(Feature feature, Action<Models.HotKey> action) {
             if (!feature.Enable) {
                 return;
             }
 
             KeyModifier keyModifier = KeyModifier.None;
             feature.Modift.Split(',').ToList().ForEach(x => keyModifier = keyModifier | (KeyModifier)Enum.Parse(typeof(KeyModifier), x.Trim()));
-            hotKeys.Add(new Moudle.HotKey((Key)Enum.Parse(typeof(Key), feature.Key), keyModifier, action));
+            hotKeys.Add(new Models.HotKey((Key)Enum.Parse(typeof(Key), feature.Key), keyModifier, action));
         }
         public void RegAllHotkey() {
             RegHotkey(App.Settings.HotKey.Feature1, HotkeyAction1);

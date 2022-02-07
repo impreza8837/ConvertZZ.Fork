@@ -45,7 +45,7 @@
                             <ListBoxItem Uid="Item_Clipboard_Convert"
                                          Content="剪貼簿轉換" />
                             <ListBoxItem Uid="Item_AudioTagConvert"
-                                         Content="Audio標籤轉換" />
+                                         Content="音樂標籤轉換" />
                             <ListBoxItem Uid="Item_Exit"
                                          Content="結束" />
                         </ListBox>

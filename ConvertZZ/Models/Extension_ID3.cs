@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConvertZZ.Moudle {
+namespace ConvertZZ.Models {
     public static class Extension_ID3 {
         public static bool SetPropertiesValue(this TagLib.Tag tag, string key, string str) {
             try {

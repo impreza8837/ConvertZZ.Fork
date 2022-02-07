@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Input;
 using System.Windows.Interop;
 
-namespace ConvertZZ.Moudle {
+namespace ConvertZZ.Models {
     public class HotKey : IDisposable {
         private static Dictionary<int, HotKey> _dictHotKeyToCalBackProc;
 

@@ -10,7 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 
-using ConvertZZ.Moudle;
+using ConvertZZ.Models;
 
 namespace ConvertZZ {
     /// <summary>

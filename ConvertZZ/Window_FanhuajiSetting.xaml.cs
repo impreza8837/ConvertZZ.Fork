@@ -23,13 +23,13 @@ namespace ConvertZZ {
             InitializeComponent();
             string[] names = Enum.GetNames(typeof(Enum_Modules));
             foreach (string s in names) {
-                if ((from x in App.Settings.Fanhuaji_Setting.Modules
+                if ((from x in App.Settings.FanhuajiSettings.Modules
                      where x.ModuleName.ToString() == s
                      select x).Count() == 0) {
-                    App.Settings.Fanhuaji_Setting.Modules.Add(new Module((Enum_Modules)Enum.Parse(typeof(Enum_Modules), s), null));
+                    App.Settings.FanhuajiSettings.Modules.Add(new Module((Enum_Modules)Enum.Parse(typeof(Enum_Modules), s), null));
                 }
             }
-            DataContext = App.Settings.Fanhuaji_Setting;
+            DataContext = App.Settings.FanhuajiSettings;
             DataGrid_ReplaceList.DataContext = this;
         }
 
@@ -50,16 +50,16 @@ namespace ConvertZZ {
 
             switch (replaceDicIndex) {
                 case 0:
-                    App.Settings.Fanhuaji_Setting.UserPreReplace.Clear();
-                    App.Settings.Fanhuaji_Setting.UserPreReplace.AddRange(ReplaceList);
+                    App.Settings.FanhuajiSettings.UserPreReplace.Clear();
+                    App.Settings.FanhuajiSettings.UserPreReplace.AddRange(ReplaceList);
                     break;
                 case 1:
-                    App.Settings.Fanhuaji_Setting.UserPostReplace.Clear();
-                    App.Settings.Fanhuaji_Setting.UserPostReplace.AddRange(ReplaceList);
+                    App.Settings.FanhuajiSettings.UserPostReplace.Clear();
+                    App.Settings.FanhuajiSettings.UserPostReplace.AddRange(ReplaceList);
                     break;
                 case 2:
-                    App.Settings.Fanhuaji_Setting.UserProtectReplace.Clear();
-                    App.Settings.Fanhuaji_Setting.UserProtectReplace.AddRange(ReplaceList);
+                    App.Settings.FanhuajiSettings.UserProtectReplace.Clear();
+                    App.Settings.FanhuajiSettings.UserProtectReplace.AddRange(ReplaceList);
                     break;
             }
             ReplaceList.Clear();
@@ -67,15 +67,15 @@ namespace ConvertZZ {
             switch (uid) {
                 case "1":
                     replaceDicIndex = 0;
-                    ReplaceList.AddRange(App.Settings.Fanhuaji_Setting.UserPreReplace);
+                    ReplaceList.AddRange(App.Settings.FanhuajiSettings.UserPreReplace);
                     break;
                 case "2":
                     replaceDicIndex = 1;
-                    ReplaceList.AddRange(App.Settings.Fanhuaji_Setting.UserPostReplace);
+                    ReplaceList.AddRange(App.Settings.FanhuajiSettings.UserPostReplace);
                     break;
                 case "3":
                     replaceDicIndex = 2;
-                    ReplaceList.AddRange(App.Settings.Fanhuaji_Setting.UserProtectReplace);
+                    ReplaceList.AddRange(App.Settings.FanhuajiSettings.UserProtectReplace);
                     break;
             }
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ReplaceList"));
