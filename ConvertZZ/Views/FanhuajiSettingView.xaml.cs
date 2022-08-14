@@ -6,8 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-using Fanhuaji_API.Class;
 using Fanhuaji_API.Enum;
+using Fanhuaji_API.Models;
 namespace ConvertZZ.Views {
     /// <summary>
     /// FanhuajiSettingView.xaml 的互動邏輯

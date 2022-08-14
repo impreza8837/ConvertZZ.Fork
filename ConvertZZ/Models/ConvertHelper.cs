@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using ConvertZZ.Enums;
 
-using Fanhuaji_API.Class;
+using Fanhuaji_API.Models;
 
 using Flier.Toolbox.Text;
 

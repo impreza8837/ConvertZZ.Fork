@@ -77,120 +77,120 @@ namespace ConvertZZ.Views.Pages {
             StringBuilder AppendLog = new StringBuilder();
             switch (FileMode) {
                 case true: {
-                    FileList.ToList().ForEach(x => x.IsReplace = false);
-                    var temp = FileList.Where(x => x.IsChecked).ToList();
-                    double count_total = temp.Count, count_current = 0.0;
-                    DismissButtonProgress = 0;
-                    bool replaceALL = false;
-                    bool skip = false;
-                    foreach (var _temp in temp) {
-                        string TargetPath = Path.Combine(Path.Combine(OutputPath, _temp.Path.Substring(_temp.ParentPath.Length + (_temp.Path.Length == _temp.ParentPath.Length ? 0 : 1))), _temp.Name);
-                        if (!replaceALL && File.Exists(TargetPath)) {
-                            if (!skip) {
-                                switch (Window_MessageBoxEx.ShowDialog(string.Format("{0}發生檔名衝突，是否取代?", _temp.Name), "警告", "取代", "略過", "取消", "套用到全部")) {
-                                    case Window_MessageBoxEx.MessageBoxExResult.A:
-                                        break;
-                                    case Window_MessageBoxEx.MessageBoxExResult.B:
-                                        continue;
-                                    case Window_MessageBoxEx.MessageBoxExResult.C:
-                                    case Window_MessageBoxEx.MessageBoxExResult.CO:
-                                        DismissButtonProgress = 100.0;
-                                        ResetConvertButton((Button)e.Source);
-                                        listview.SelectedIndex = -1;
-                                        return;
-                                    case Window_MessageBoxEx.MessageBoxExResult.AO:
-                                        replaceALL = true;
-                                        break;
-                                    case Window_MessageBoxEx.MessageBoxExResult.BO:
-                                        skip = true;
-                                        continue;
-                                    case Window_MessageBoxEx.MessageBoxExResult.NONE:
-                                        continue;
-                                }
-                            } else {
-                                continue;
-                            }
-                        }
-                        _temp.IsReplace = true;
-                    }
-                    temp = FileList.Where(x => x.IsChecked && x.IsReplace).ToList();
-                    count_current = count_total - temp.Count;
-                    DismissButtonProgress = count_current / count_total * 100.0;
-                    Mouse.OverrideCursor = Cursors.Wait;
-                    stopwatch.Start();
-                    foreach (var _temp in temp) {
-                        if (cts.IsCancellationRequested) {
-                            ResetConvertButton((Button)e.Source);
-                            return;
-                        }
-                        string TargetPath = Path.Combine(Path.Combine(OutputPath, _temp.Path.Substring(_temp.ParentPath.Length + (_temp.Path.Length == _temp.ParentPath.Length ? 0 : 1))), _temp.Name);
-
-                        string str = "";
-                        using (StreamReader sr = new StreamReader(Path.Combine(_temp.Path, _temp.Name), encoding[0], false)) {
-                            str = sr.ReadToEnd();
-                            sr.Close();
-                        }
-                        try {
-                            str = await ConvertHelper.ConvertAsync(str, ToChinese);
-                            if (!string.IsNullOrWhiteSpace(App.Settings.FileConvert.FixLabel)) {
-                                var list = App.Settings.FileConvert.FixLabel.Split('|').Select(x => x.ToLower()).ToList();
-                                list.ForEach(x => {
-                                    if (Path.GetExtension(_temp.Name).ToLower() == x) {
-                                        switch (x) {
-                                            //"*.htm|*.html|*.shtm|*.shtml|*.asp|*.apsx|*.php|*.pl|*.cgi|*.js"
-                                            case ".html":
-                                            case ".htm":
-                                            case ".php":
-                                            case ".shtm":
-                                            case ".shtml":
-                                            case ".asp":
-                                            case ".aspx":
-                                                //html5
-                                                str = Regex.Replace(str, "<meta(\\s+.*?)charset=\"(.*?)\"(.*?)>", string.Format("<meta$1charset=\"{0}\"$3>", encoding[1].WebName), RegexOptions.IgnoreCase);
-                                                //html4
-                                                str = Regex.Replace(str, "<meta\\s+(.*?)content=\"(.*?)charset=(.*?)\"(.*?)>", string.Format("<meta $1content=\"$2charset={0}\"$4>", encoding[1].WebName), RegexOptions.IgnoreCase);
-                                                //php
-                                                str = Regex.Replace(str, @"header(""Content-Type:text/html;\s*charset=(.*?)"");", string.Format(@"header(""Content-Type:text/html; charset={0}"");", encoding[1].WebName), RegexOptions.IgnoreCase);
-                                                break;
-                                            case "css":
-                                                str = Regex.Replace(str, "@charset \"(.*?)\"", string.Format("@charset \"{0}\"", encoding[1].WebName), RegexOptions.IgnoreCase);
-                                                break;
-                                        }
+                        FileList.ToList().ForEach(x => x.IsReplace = false);
+                        var temp = FileList.Where(x => x.IsChecked).ToList();
+                        double count_total = temp.Count, count_current = 0.0;
+                        DismissButtonProgress = 0;
+                        bool replaceALL = false;
+                        bool skip = false;
+                        foreach (var _temp in temp) {
+                            string TargetPath = Path.Combine(Path.Combine(OutputPath, _temp.Path.Substring(_temp.ParentPath.Length + (_temp.Path.Length == _temp.ParentPath.Length ? 0 : 1))), _temp.Name);
+                            if (!replaceALL && File.Exists(TargetPath)) {
+                                if (!skip) {
+                                    switch (Window_MessageBoxEx.ShowDialog(string.Format("{0}發生檔名衝突，是否取代?", _temp.Name), "警告", "取代", "略過", "取消", "套用到全部")) {
+                                        case Window_MessageBoxEx.MessageBoxExResult.A:
+                                            break;
+                                        case Window_MessageBoxEx.MessageBoxExResult.B:
+                                            continue;
+                                        case Window_MessageBoxEx.MessageBoxExResult.C:
+                                        case Window_MessageBoxEx.MessageBoxExResult.CO:
+                                            DismissButtonProgress = 100.0;
+                                            ResetConvertButton((Button)e.Source);
+                                            listview.SelectedIndex = -1;
+                                            return;
+                                        case Window_MessageBoxEx.MessageBoxExResult.AO:
+                                            replaceALL = true;
+                                            break;
+                                        case Window_MessageBoxEx.MessageBoxExResult.BO:
+                                            skip = true;
+                                            continue;
+                                        case Window_MessageBoxEx.MessageBoxExResult.NONE:
+                                            continue;
                                     }
-                                });
+                                } else {
+                                    continue;
+                                }
                             }
+                            _temp.IsReplace = true;
+                        }
+                        temp = FileList.Where(x => x.IsChecked && x.IsReplace).ToList();
+                        count_current = count_total - temp.Count;
+                        DismissButtonProgress = count_current / count_total * 100.0;
+                        Mouse.OverrideCursor = Cursors.Wait;
+                        stopwatch.Start();
+                        foreach (var _temp in temp) {
                             if (cts.IsCancellationRequested) {
                                 ResetConvertButton((Button)e.Source);
                                 return;
                             }
-                            Directory.CreateDirectory(Path.GetDirectoryName(TargetPath));
-                            using (StreamWriter sw = new StreamWriter(TargetPath, false, encoding[1] == Encoding.UTF8 ? new UTF8Encoding(App.Settings.FileConvert.UnicodeAddBom) : encoding[1])) {
-                                sw.Write(str);
-                                sw.Flush();
-                            }
-                        } catch (Exception ex) {
-                            AppendLog.AppendLine($"[Error][{ex.Message}] \"{Path.Combine(_temp.Path, _temp.Name)}\"");
-                        } finally {
-                            count_current++;
-                            DismissButtonProgress = count_current / count_total * 100.0;
-                        }
-                    }
-                    DismissButtonProgress = 0.0;
-                    stopwatch.Stop();
-                    Mouse.OverrideCursor = null;
-                }
-                break;
-                case false: {
-                    stopwatch.Start();
+                            string TargetPath = Path.Combine(Path.Combine(OutputPath, _temp.Path.Substring(_temp.ParentPath.Length + (_temp.Path.Length == _temp.ParentPath.Length ? 0 : 1))), _temp.Name);
 
-                    try {
-                        ConvertFolderAndFileName(true);
-                    } catch (NullReferenceException ex) {
-                        AppendLog.AppendLine(ex.Message);
+                            string str = "";
+                            using (StreamReader sr = new StreamReader(Path.Combine(_temp.Path, _temp.Name), encoding[0], false)) {
+                                str = sr.ReadToEnd();
+                                sr.Close();
+                            }
+                            try {
+                                str = await ConvertHelper.ConvertAsync(str, ToChinese);
+                                if (!string.IsNullOrWhiteSpace(App.Settings.FileConvert.FixLabel)) {
+                                    var list = App.Settings.FileConvert.FixLabel.Split('|').Select(x => x.ToLower()).ToList();
+                                    list.ForEach(x => {
+                                        if (Path.GetExtension(_temp.Name).ToLower() == x) {
+                                            switch (x) {
+                                                //"*.htm|*.html|*.shtm|*.shtml|*.asp|*.apsx|*.php|*.pl|*.cgi|*.js"
+                                                case ".html":
+                                                case ".htm":
+                                                case ".php":
+                                                case ".shtm":
+                                                case ".shtml":
+                                                case ".asp":
+                                                case ".aspx":
+                                                    //html5
+                                                    str = Regex.Replace(str, "<meta(\\s+.*?)charset=\"(.*?)\"(.*?)>", string.Format("<meta$1charset=\"{0}\"$3>", encoding[1].WebName), RegexOptions.IgnoreCase);
+                                                    //html4
+                                                    str = Regex.Replace(str, "<meta\\s+(.*?)content=\"(.*?)charset=(.*?)\"(.*?)>", string.Format("<meta $1content=\"$2charset={0}\"$4>", encoding[1].WebName), RegexOptions.IgnoreCase);
+                                                    //php
+                                                    str = Regex.Replace(str, @"header(""Content-Type:text/html;\s*charset=(.*?)"");", string.Format(@"header(""Content-Type:text/html; charset={0}"");", encoding[1].WebName), RegexOptions.IgnoreCase);
+                                                    break;
+                                                case "css":
+                                                    str = Regex.Replace(str, "@charset \"(.*?)\"", string.Format("@charset \"{0}\"", encoding[1].WebName), RegexOptions.IgnoreCase);
+                                                    break;
+                                            }
+                                        }
+                                    });
+                                }
+                                if (cts.IsCancellationRequested) {
+                                    ResetConvertButton((Button)e.Source);
+                                    return;
+                                }
+                                Directory.CreateDirectory(Path.GetDirectoryName(TargetPath));
+                                using (StreamWriter sw = new StreamWriter(TargetPath, false, encoding[1] == Encoding.UTF8 ? new UTF8Encoding(App.Settings.FileConvert.UnicodeAddBom) : encoding[1])) {
+                                    sw.Write(str);
+                                    sw.Flush();
+                                }
+                            } catch (Exception ex) {
+                                AppendLog.AppendLine($"[Error][{ex.Message}] \"{Path.Combine(_temp.Path, _temp.Name)}\"");
+                            } finally {
+                                count_current++;
+                                DismissButtonProgress = count_current / count_total * 100.0;
+                            }
+                        }
+                        DismissButtonProgress = 0.0;
+                        stopwatch.Stop();
+                        Mouse.OverrideCursor = null;
                     }
-                    stopwatch.Stop();
-                }
-                break;
+                    break;
+                case false: {
+                        stopwatch.Start();
+
+                        try {
+                            ConvertFolderAndFileName(true);
+                        } catch (NullReferenceException ex) {
+                            AppendLog.AppendLine(ex.Message);
+                        }
+                        stopwatch.Stop();
+                    }
+                    break;
             }
             if (AppendLog.Length != 0) {
                 Window_MessageBoxEx.ShowDialog(AppendLog.ToString(), "轉換過程中出現錯誤", "我知道了");

@@ -2,8 +2,10 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-using Fanhuaji_API;
+using ConvertZZ.Models;
+
 using Fanhuaji_API.Enum;
+using Fanhuaji_API.Models;
 
 namespace ConvertZZ {
     public class FanhuajiSettings : Config, INotifyPropertyChanged {

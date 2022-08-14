@@ -158,33 +158,33 @@ namespace ConvertZZ.Views {
             e.Handled = true;
             switch (e.ChangedButton) {
                 case MouseButton.Left: {
-                    if (Left == pointNow.X && Top == pointNow.Y && leftDown) {
-                        if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) {
-                            MenuItem_Click(GetByUid(NotifyIconMenu, App.Settings.QuickStart.LeftClick_Ctrl), null);
-                        } else if (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt)) {
-                            MenuItem_Click(GetByUid(NotifyIconMenu, App.Settings.QuickStart.LeftClick_Alt), null);
-                        } else if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) {
-                            MenuItem_Click(GetByUid(NotifyIconMenu, App.Settings.QuickStart.LeftClick_Shift), null);
+                        if (Left == pointNow.X && Top == pointNow.Y && leftDown) {
+                            if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) {
+                                MenuItem_Click(GetByUid(NotifyIconMenu, App.Settings.QuickStart.LeftClick_Ctrl), null);
+                            } else if (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt)) {
+                                MenuItem_Click(GetByUid(NotifyIconMenu, App.Settings.QuickStart.LeftClick_Alt), null);
+                            } else if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) {
+                                MenuItem_Click(GetByUid(NotifyIconMenu, App.Settings.QuickStart.LeftClick_Shift), null);
+                            } else {
+                                e.Handled = false;
+                            }
                         } else {
                             e.Handled = false;
                         }
-                    } else {
-                        e.Handled = false;
                     }
-                }
-                break;
+                    break;
                 case MouseButton.Right: {
-                    if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) {
-                        MenuItem_Click(GetByUid(NotifyIconMenu, App.Settings.QuickStart.RightClick_Ctrl), null);
-                    } else if (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt)) {
-                        MenuItem_Click(GetByUid(NotifyIconMenu, App.Settings.QuickStart.RightClick_Alt), null);
-                    } else if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) {
-                        MenuItem_Click(GetByUid(NotifyIconMenu, App.Settings.QuickStart.RightClick_Shift), null);
-                    } else {
-                        e.Handled = false;
+                        if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) {
+                            MenuItem_Click(GetByUid(NotifyIconMenu, App.Settings.QuickStart.RightClick_Ctrl), null);
+                        } else if (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt)) {
+                            MenuItem_Click(GetByUid(NotifyIconMenu, App.Settings.QuickStart.RightClick_Alt), null);
+                        } else if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) {
+                            MenuItem_Click(GetByUid(NotifyIconMenu, App.Settings.QuickStart.RightClick_Shift), null);
+                        } else {
+                            e.Handled = false;
+                        }
                     }
-                }
-                break;
+                    break;
                 default:
                     e.Handled = false;
                     break;
