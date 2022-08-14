@@ -9,8 +9,11 @@
         Closing="Window_Closing"
         Title="設定"
         MinWidth="800"
-        FontFamily="Arial"
-        SizeToContent="WidthAndHeight">
+        Background="#FF424242"
+        Foreground="#FFFAFAFA"
+        FontFamily="Microsoft YaHei"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />

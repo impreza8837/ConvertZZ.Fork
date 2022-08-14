@@ -12,7 +12,9 @@
         Width="400"
         WindowStyle="None"
         AllowsTransparency="True"
-        Background="Transparent">
+        Background="#FF424242"
+        Foreground="#FFFAFAFA"
+        FontFamily="Microsoft YaHei">
     <materialDesign:Card Margin="20"
                          VerticalAlignment="Stretch"
                          materialDesign:ShadowAssist.ShadowDepth="Depth4">

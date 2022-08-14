@@ -4,11 +4,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="About"
+        Title="關於"
         MinHeight="200"
         MinWidth="350"
         ResizeMode="NoResize"
         Topmost="True"
+        Background="#FF424242"
+        Foreground="#FFFAFAFA"
+        FontFamily="Microsoft YaHei"
         SizeToContent="WidthAndHeight">
     <StackPanel>
         <Grid Margin="5">
@@ -27,7 +30,6 @@
             <Label Content="ConvertZZ"
                    Grid.Column="1"
                    FontSize="40"
-                   FontFamily="Arial"
                    VerticalAlignment="Center"
                    MouseUp="Label_MouseUp" />
             <Label Name="Version"

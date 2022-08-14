@@ -10,9 +10,10 @@
       d:DesignHeight="600"
       d:DesignWidth="1200"
       Loaded="Page_Loaded"
-      Title="AudioTagsConverView">
-
-
+      Title="AudioTagsConverView"
+      Background="#FF424242"
+      Foreground="#FFFAFAFA"
+      FontFamily="Microsoft YaHei">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -98,7 +99,6 @@
                         </Grid.RowDefinitions>
                         <ListView x:Name="listview"
                                   ItemsSource="{Binding FileList, Mode=TwoWay}"
-                                  materialDesign:DataGridAssist.CellPadding="4 2 2 2"
                                   materialDesign:DataGridAssist.ColumnHeaderPadding="4 5 2 5"
                                   Grid.ColumnSpan="2"
                                   SelectionChanged="Listview_SelectionChanged">
@@ -235,7 +235,6 @@
                           ItemsSource="{Binding ID3v1_TagList, Mode=TwoWay}"
                           IsEnabled="{Binding ElementName=Checkbox_ID3v1,Path=IsChecked}"
                           Grid.Row="2"
-                          materialDesign:DataGridAssist.CellPadding="4 2 2 2"
                           materialDesign:DataGridAssist.ColumnHeaderPadding="4 5 2 5"
                           Grid.ColumnSpan="2">
                     <ListView.View>
@@ -349,7 +348,6 @@
                           Grid.Row="2"
                           ItemsSource="{Binding ID3v2_TagList, Mode=TwoWay}"
                           IsEnabled="{Binding ElementName=Checkbox_ID3v2,Path=IsChecked}"
-                          materialDesign:DataGridAssist.CellPadding="4 2 2 2"
                           materialDesign:DataGridAssist.ColumnHeaderPadding="4 5 2 5"
                           Grid.ColumnSpan="2">
                     <ListView.View>

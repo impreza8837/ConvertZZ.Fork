@@ -8,11 +8,13 @@
         materialDesign:ShadowAssist.CacheMode="{x:Null}"
         MinWidth="600"
         MinHeight="600"
-        FontFamily="Arial"
+        Background="#FF424242"
+        Foreground="#FFFAFAFA"
+        FontFamily="Microsoft YaHei"
         WindowStartupLocation="CenterScreen"
         Title="字典編輯器"
-        Height="auto"
-        Width="auto">
+        Height="480"
+        Width="1280">
     <Grid Margin="9">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -41,7 +43,6 @@
                   AutoGeneratingColumn="AutoGeneratingColumn"
                   EnableRowVirtualization="True"
                   EnableColumnVirtualization="True"
-                  Background="White"
                   Grid.Row="1"
                   Margin="0,0,9,0" />
         <Grid Grid.Row="2"
@@ -59,9 +60,9 @@
                     Grid.Column="1" />
         </Grid>
         <TextBlock Text="*優先權較高的優先，相同則為長度較長的優先"
-                   Foreground="Blue"
                    HorizontalAlignment="Center"
-                   Grid.Row="3" />
+                   Grid.Row="3"
+                   Foreground="#FFFFA0A0" />
         <DockPanel HorizontalAlignment="Center"
                    Grid.Column="1">
             <TextBlock Text="繁轉簡"
@@ -93,7 +94,6 @@
                      TextChanged="TextBox_TextChanged"
                      Grid.Row="1"
                      Margin="2"
-                     Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
                      VerticalScrollBarVisibility="Auto"
@@ -105,7 +105,6 @@
             <TextBox Text="{Binding Output}"
                      Grid.Row="3"
                      Margin="2"
-                     Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
                      VerticalScrollBarVisibility="Auto" />

@@ -6,10 +6,14 @@
       xmlns:vc="clr-namespace:ConvertZZ.Views.Controls"
       x:Class="ConvertZZ.Views.Pages.FileConverView"
       mc:Ignorable="d"
+      Background="#FF424242"
+      Foreground="#FFFAFAFA"
+      FontFamily="Microsoft YaHei"
       materialDesign:ShadowAssist.CacheMode="{x:Null}"
       d:DesignHeight="700"
       d:DesignWidth="1200"
-      Title="FileConverView">
+      Title="FileConverView"
+      Opacity="0.8">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -84,7 +88,6 @@
                         </Grid.RowDefinitions>
                         <ListView x:Name="listview"
                                   ItemsSource="{Binding FileList, Mode=TwoWay}"
-                                  materialDesign:DataGridAssist.CellPadding="4 2 2 2"
                                   materialDesign:DataGridAssist.ColumnHeaderPadding="4 5 2 5"
                                   Grid.ColumnSpan="2"
                                   SelectionChanged="Listview_SelectionChanged">
@@ -131,7 +134,8 @@
                         VerticalAlignment="Center"
                         Margin="5"
                         Padding="0,5"
-                        Click="Button_Clear_Clicked" />
+                        Click="Button_Clear_Clicked"
+                        Cursor="Hand" />
             </Grid>
         </materialDesign:Card>
         <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth1"
@@ -286,7 +290,7 @@
             <TextBox Text="{Binding OutputPath, Mode=TwoWay}" />
             <Button Content="輸出路徑"
                     Grid.Column="1"
-                    Padding="10,7,10,5"
+                    Padding="10,5,10,5"
                     Margin="20,10,20,0"
                     Click="Button_OutputPath_Click" />
         </Grid>

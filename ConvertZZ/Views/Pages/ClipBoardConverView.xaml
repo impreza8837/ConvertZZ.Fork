@@ -10,7 +10,10 @@
       d:DesignWidth="1200"
       Title="ClipBoardConverView"
       Loaded="Page_Loaded"
-      Unloaded="Page_Unloaded">
+      Unloaded="Page_Unloaded"
+      Background="#FF424242"
+      Foreground="#FFFAFAFA"
+      FontFamily="Microsoft YaHei">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />

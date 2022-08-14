@@ -23,18 +23,24 @@ namespace ConvertZZ {
     /// </summary>
     public partial class App : Application {
         public static System.Windows.Forms.NotifyIcon nIcon = new System.Windows.Forms.NotifyIcon();
+
         public static Enum_DictionaryStatus DictionaryStatus { get; set; } = Enum_DictionaryStatus.NotLoad;
+
         public App() {
 
         }
 
         public static ChineseConverter ChineseConverter { get; set; } = new ChineseConverter();
+
         public static Fanhuaji Fanhuaji {
             get; set;
         }
+
         private async void Application_Startup(object sender, StartupEventArgs e) {
             Reload(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ConvertZZ.json"));
+
             ShutdownMode = ShutdownMode.OnMainWindowClose;
+
             if (e.Args.Length > 0) {
                 if (e.Args[0] == "/file" || e.Args[0] == "/audio") {
                     var ps = Process.GetProcessesByName("ConvertZZ");
@@ -48,6 +54,7 @@ namespace ConvertZZ {
                         DialogHostView.Show();
                         return;
                     }
+
                     try {
                         using (NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", "ConvertZZ_Pipe", PipeDirection.InOut, PipeOptions.None, TokenImpersonationLevel.Impersonation)) {
                             Console.WriteLine("Connecting to server...\n");
@@ -62,10 +69,14 @@ namespace ConvertZZ {
                             string returns = await ss.ReadStringAsync();
                             pipeClient.Close();
                         };
-                    } catch { }
+                    } catch {
+
+                    }
+
                     Shutdown(1);
                     return;
                 }
+
                 Encoding[] encoding = new Encoding[2];
                 bool EncodingSetted = false;
                 int ToChinese = 0;
@@ -73,6 +84,7 @@ namespace ConvertZZ {
                 Regex Regex_path1 = null;
                 int VocabularyCorrection = -1;
                 Enum_Engine Engine = Settings.Engine;
+
                 for (int i = 0; i < e.Args.Length; i++) {
                     switch (e.Args[i]) {
                         case "/i:ule":
@@ -144,12 +156,15 @@ namespace ConvertZZ {
                             break;
                     }
                 }
+
                 if (VocabularyCorrection == 1 || (VocabularyCorrection == -1 && Settings.VocabularyCorrection)) {
                     await LoadDictionary(Engine);
                 }
+
                 string s = "";
                 List<string> file = new List<string>();
                 bool ModeIsOneFile = true;
+
                 if (path1.Contains("*")) {
                     ModeIsOneFile = false;
                     Directory.GetFiles(Path.GetDirectoryName(path1), Path.GetFileName(path1)).ToList().ForEach(x =>
@@ -165,12 +180,14 @@ namespace ConvertZZ {
                         return;
                     }
                 }
+
                 if (encoding[1] == null || string.IsNullOrWhiteSpace(path1)) {
                     Console.WriteLine("參數錯誤(目標編碼為空或來源檔案路徑未填寫)");
                     Console.Read();
                     Shutdown(1);
                     return;
                 }
+
                 if (string.IsNullOrWhiteSpace(path2)) {
                     path2 = path1;
                 }
@@ -181,18 +198,21 @@ namespace ConvertZZ {
                     Shutdown(1);
                     return;
                 }
+
                 if (path1.Contains("*") && !path2.Contains("*") && File.Exists(path2)) {
                     Console.WriteLine("參數錯誤(輸入路徑具有萬用字元，但輸出路徑卻指向一個檔案)");
                     Console.Read();
                     Shutdown(1);
                     return;
                 }
+
                 foreach (var f in file) {
                     using (Stream stream = new FileStream(f, FileMode.Open, FileAccess.Read, FileShare.Read)) {
                         using (StreamReader streamReader = new StreamReader(stream, encoding[0], false)) {
                             s = streamReader.ReadToEnd();
                         }
                     }
+
                     if (!EncodingSetted) {
                         switch (EncodingAnalyzer.Analyze(s)) {
                             case -1:
@@ -215,6 +235,7 @@ namespace ConvertZZ {
                         Console.WriteLine($"[Error][{DateTime.Now.ToString()}][{ex.Message}] {f}");
                         continue;
                     }
+
                     if (ModeIsOneFile) {
                         using (StreamWriter streamWriter = new StreamWriter(path2, false, encoding[1] == Encoding.UTF8 ? new UTF8Encoding(Settings.FileConvert.UnicodeAddBom) : encoding[1])) {
                             streamWriter.Write(s);
@@ -248,6 +269,7 @@ namespace ConvertZZ {
                         }
                     }
                 }
+
                 Shutdown(1);
                 return;
             } else {
@@ -259,11 +281,13 @@ namespace ConvertZZ {
                 ShowUI();
             }
         }
+
         internal static void CleanDictionary() {
             ChineseConverter.Lines.Clear();
             ChineseConverter.Reload();
             DictionaryStatus = Enum_DictionaryStatus.NotLoad;
         }
+
         internal static async Task LoadDictionary(Enum_Engine Engine) {
             switch (Engine) {
                 case Enum_Engine.Local:
@@ -283,10 +307,12 @@ namespace ConvertZZ {
                     break;
             }
         }
+
         private async void ShowUI() {
             await LoadDictionary(Settings.Engine);
             nIcon.Icon = ConvertZZ.Properties.Resources.icon;
             nIcon.Visible = true;
+
             if (Settings.CheckVersion) {
                 new Thread(new ThreadStart(() => {
                     var versionReport = UpdateChecker.ChecktVersion();
@@ -297,6 +323,7 @@ namespace ConvertZZ {
                     }
                 })).Start();
             }
+
             MainWindow window = new MainWindow();
             MainWindow = window;
             window.Show();
