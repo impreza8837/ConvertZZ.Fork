@@ -27,6 +27,7 @@ namespace ConvertZZ.Views.Pages {
             Combobox_Filter.ItemsSource = App.Settings.FileConvert.GetFilterList();
             Combobox_Filter.SelectedIndex = 0;
         }
+
         public AudioTagsConverView(Format format, string[] FileNames) : this(format) {
             if (FileNames == null) {
                 return;
@@ -37,30 +38,37 @@ namespace ConvertZZ.Views.Pages {
         }
         private void Page_Loaded(object sender, RoutedEventArgs e) {
         }
+
         public enum Format {
             ID3,
             APE,
             OGG
         }
+
         /// <summary>
         /// 編碼轉換 [0]:來源編碼   [1]:輸出編碼
         /// </summary>
         Encoding[] encoding = new Encoding[2] { Encoding.GetEncoding("GBK"), Encoding.GetEncoding("Big5") };
+
         /// <summary>
         /// 編碼轉換 [0]:來源編碼   [1]:輸出編碼
         /// </summary>
         Encoding[] encoding2 = new Encoding[2] { Encoding.GetEncoding("GBK"), Encoding.GetEncoding("Big5") };
+
         /// <summary>
         /// 輸出簡繁轉換：0:一般  1:繁體中文 2:簡體中文
         /// </summary>
         int ToChinese1 = 0;
+
         /// <summary>
         /// 輸出簡繁轉換：0:一般  1:繁體中文 2:簡體中文
         /// </summary>
         int ToChinese2 = 0;
+
         private bool ConvertEncoding = true;
 
         string LastPath = "";
+
         private async void Button_Convert_Click(object sender, RoutedEventArgs e) {
             ((Button)e.Source).IsEnabled = false;
             Stopwatch stopwatch = new Stopwatch();
@@ -113,6 +121,7 @@ namespace ConvertZZ.Views.Pages {
             ((Button)e.Source).IsEnabled = true;
             Listview_SelectionChanged(null, null);
         }
+
         private async void Preview(string path) {
             if (!File.Exists(path)) {
                 return;
@@ -173,6 +182,7 @@ namespace ConvertZZ.Views.Pages {
                 ID3v2_TagList.Add(new TagList_Line() { TagName = "Error", Value = "未知" });
             }
         }
+
         private List<TagList_Line> GetAllStringProperties(object obj) {
             List<TagList_Line> keyValuePair = new List<TagList_Line>();
             foreach (PropertyDescriptor descriptor in TypeDescriptor.GetProperties(obj)) {
@@ -186,6 +196,7 @@ namespace ConvertZZ.Views.Pages {
             }
             return keyValuePair;
         }
+
         private bool SetPropertiesValue(object obj, string key, object value) {
             obj.GetType().GetProperty(key).SetValue(obj, value, null);
             return true;
@@ -202,9 +213,11 @@ namespace ConvertZZ.Views.Pages {
             return false;
             */
         }
+
         private void ModeChange(object sender, RoutedEventArgs e) {
 
         }
+
         private void Listview_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             if (listview.SelectedItem != null) {
                 FileList_Line line = ((FileList_Line)listview.SelectedItem);
@@ -215,6 +228,7 @@ namespace ConvertZZ.Views.Pages {
                 }
             }
         }
+
         private void Button_SelectFile_Clicked(object sender, RoutedEventArgs e) {
             OpenFileDialog fileDialog = new OpenFileDialog() { Multiselect = true, CheckFileExists = false, CheckPathExists = true, ValidateNames = false };
             fileDialog.InitialDirectory = App.Settings.FileConvert.DefaultPath;
@@ -225,6 +239,7 @@ namespace ConvertZZ.Views.Pages {
                 Combobox_Filter_SelectionChanged(Combobox_Filter, null);
             }
         }
+
         private void ImportFileNames(string[] FileNames) {
             string ParentPath = Path.GetDirectoryName(FileNames.First());
             foreach (string str in FileNames) {
@@ -242,6 +257,7 @@ namespace ConvertZZ.Views.Pages {
                 }
             }
         }
+
         private void Button_Clear_Clicked(object sender, RoutedEventArgs e) {
             FileList.Clear();
             FileListTemp.Clear();
@@ -249,6 +265,7 @@ namespace ConvertZZ.Views.Pages {
             ID3v2_TagList.Clear();
             LastPath = "";
         }
+
         private void Encoding_Selected(object sender, RoutedEventArgs e) {
             RadioButton radiobutton = ((RadioButton)sender);
             switch (radiobutton.GroupName) {
@@ -261,6 +278,7 @@ namespace ConvertZZ.Views.Pages {
             }
             ModeChange(null, null);
         }
+
         private void Chinese_Click(object sender, RoutedEventArgs e) {
             switch (((RadioButton)sender).Uid) {
                 case "NChinese1":
@@ -349,11 +367,11 @@ namespace ConvertZZ.Views.Pages {
         public ObservableCollection<FileList_Line> FileList { get; set; } = new ObservableCollection<FileList_Line>();
 
         public ObservableCollection<TagList_Line> ID3v1_TagList { get; set; } = new ObservableCollection<TagList_Line>();
+
         private ObservableCollection<TagList_Line> _ID3v2_TagList = new ObservableCollection<TagList_Line>();
+
         public ObservableCollection<TagList_Line> ID3v2_TagList {
-            get => _ID3v2_TagList; set {
-                _ID3v2_TagList = value;
-            }
+            get => _ID3v2_TagList; set => _ID3v2_TagList = value;
         }
 
         public bool Enable_ID3v1 { get; set; } = true;

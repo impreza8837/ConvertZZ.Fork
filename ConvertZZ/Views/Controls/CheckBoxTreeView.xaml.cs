@@ -118,12 +118,8 @@ namespace ConvertZZ.Views.Controls {
             return _canExecute == null ? true : _canExecute(parameter);
         }
         public event EventHandler CanExecuteChanged {
-            add {
-                CommandManager.RequerySuggested += value;
-            }
-            remove {
-                CommandManager.RequerySuggested -= value;
-            }
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
         }
         public void Execute(object parameter) {
             _execute(parameter);

@@ -78,16 +78,14 @@ namespace ConvertZZ.Models {
                 get; set;
             }
             public string SimplifiedChinese { get; set; } = "";
-            public int SimplifiedChinese_Length {
-                get => SimplifiedChinese.Length;
-            }
+            public int SimplifiedChinese_Length => SimplifiedChinese.Length;
+
             public int SimplifiedChinese_Priority {
                 get; set;
             }
             public string TraditionalChinese { get; set; } = "";
-            public int TraditionalChinese_Length {
-                get => TraditionalChinese.Length;
-            }
+            public int TraditionalChinese_Length => TraditionalChinese.Length;
+
             public int TraditionalChinese_Priority {
                 get; set;
             }

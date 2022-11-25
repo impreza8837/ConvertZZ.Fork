@@ -91,9 +91,7 @@ namespace ConvertZZ.Models {
         }
         public Visibility CheckBox_Visibility { get; set; } = Visibility.Collapsed;
         public bool CheckBox_IsChecked {
-            get => _CheckBox_IsChecked; set {
-                _CheckBox_IsChecked = value;
-            }
+            get => _CheckBox_IsChecked; set => _CheckBox_IsChecked = value;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e) {
@@ -114,9 +112,7 @@ namespace ConvertZZ.Models {
         }
 
         public string ButtonText3 {
-            get => _ButtonText3; set {
-                _ButtonText3 = value;
-            }
+            get => _ButtonText3; set => _ButtonText3 = value;
         }
         private GridLength _Button1_Width = new GridLength();
         private GridLength _Button2_Width = new GridLength();
@@ -125,24 +121,16 @@ namespace ConvertZZ.Models {
         public Visibility Button1_Visibility { get; set; } = Visibility.Visible;
         public Visibility Button2_Visibility { get; set; } = Visibility.Visible;
         public Visibility Button3_Visibility {
-            get => _Button3_Visibility; set {
-                _Button3_Visibility = value;
-            }
+            get => _Button3_Visibility; set => _Button3_Visibility = value;
         }
         public GridLength Button1_Width {
-            get => _Button1_Width; set {
-                _Button1_Width = value;
-            }
+            get => _Button1_Width; set => _Button1_Width = value;
         }
         public GridLength Button2_Width {
-            get => _Button2_Width; set {
-                _Button2_Width = value;
-            }
+            get => _Button2_Width; set => _Button2_Width = value;
         }
         public GridLength Button3_Width {
-            get => _Button3_Width; set {
-                _Button3_Width = value;
-            }
+            get => _Button3_Width; set => _Button3_Width = value;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
